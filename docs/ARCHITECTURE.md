@@ -3,10 +3,14 @@
 The package now has a canonical historical-match layer and a closed,
 leakage-safe pre-match feature layer alongside the Phase 1 evaluation
 contracts, the Phase 3 probabilistic baseline, and a separate Phase 4
-closing-market benchmark.
+closing-market benchmark. Phase 5A adds an optional research namespace without
+changing the stable path.
 
 ```text
 src/fbai/
+├── research/
+│   ├── common.py         immutable candidate/gate reporting
+│   └── match2vec/        optional sequence representation and evaluation
 ├── models/
 │   ├── preprocessing.py fixed 52-column selection and train-only transforms
 │   └── logistic.py      source-verified LR52 fit and H/D/A prediction
@@ -59,6 +63,13 @@ separate closing-odds table
 LR52 probabilities + market probabilities
     -> exact natural-key intersection
     -> aligned chronological comparison report
+
+experimental branch:
+train history
+    -> strictly-prior match descriptor sequences
+    -> fold-local Match2Vec representation
+    -> representation + exact LR52 numeric tuple
+    -> identical-row LR52/candidate report
 ```
 
 The canonical schema contains match identity, full-time result and goals, and
@@ -145,3 +156,16 @@ aligned LR52 in immutable aggregate-only records.
 `testing.market` creates a separate deterministic invented market table,
 including controlled missing, incomplete, duplicate, invalid, and shuffled
 modes. It never changes the canonical synthetic-match API.
+
+## Experimental research boundary
+
+`research.match2vec` is not imported by the stable LR52 path and PyTorch is an
+optional extra. Each outer fold creates a training-only vocabulary, inner-fit
+numeric preprocessing, and a new CPU network. Its descriptor corpus uses only
+matches strictly before each target date, so same-date outcomes cannot cross
+the information boundary. The learned 100-value representation has a separate
+closed contract and is never accepted by `fit_lr52`.
+
+The source-selected candidate concatenates that representation with the exact
+52 LR52 numeric values inside its own linear H/D/A head. It does not alter
+`FEATURE_COLUMNS`, `LR52Config`, the LR52 evaluator, or the market evaluator.

@@ -1,8 +1,8 @@
 # FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-research. Phase 4 adds a separate closing-market benchmark to the reproducible
-LR52 pipeline:
+research. Phase 5A adds an isolated Match2Vec research candidate alongside the
+reproducible LR52 pipeline and separate closing-market benchmark:
 
 - source-shaped CSV normalization into one canonical schema;
 - strict match and natural-key integrity validation;
@@ -20,14 +20,18 @@ LR52 pipeline:
 - strict, provider-neutral closing-odds normalization;
 - source-verified reciprocal implied probabilities and overround removal;
 - exact-key market coverage and same-match LR52 comparison;
+- an optional, fold-local Match2Vec sequence-representation experiment;
+- a predefined candidate gate with LR52 comparison on identical rows;
 - separated development, historical-final, and diagnostic reports;
 - deterministic, wholly synthetic raw, canonical, and separate market records;
 - tests and CI for those guarantees.
 
 No third-party football or odds data is committed. CI trains and evaluates
-only on invented synthetic data. LR52 and the closing market remain distinct
-systems; the historical records are offline reproductions, not live forecasts,
-market-beating claims, or a betting service.
+only on invented synthetic data. LR52 remains the default internal model.
+Match2Vec improved historical development Log Loss by `0.003764` on the public
+same-date-safe protocol, below its predefined `0.005` gate, so its disposition
+is `MATCH2VEC_REJECTED_FOR_NOW`. These records are offline reproductions, not
+live forecasts, market-beating claims, or a betting service.
 
 ## Install
 
@@ -38,7 +42,14 @@ python -m pip install -e ".[dev]"
 pytest
 ruff check .
 ruff format --check .
-mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/evaluation
+mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/evaluation src/fbai/research
+```
+
+The optional research environment is installed separately:
+
+```bash
+python -m pip install -e ".[dev,match2vec]"
+pytest tests/research
 ```
 
 ## Small example
@@ -82,6 +93,12 @@ separate closing-odds table
 
 LR52 + market
     -> identical-key chronological comparison report
+
+experimental only:
+train history
+    -> fold-local Match2Vec sequence representation
+    -> Match2Vec + exact LR52 numeric tuple
+    -> identical-row candidate comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -97,6 +114,7 @@ See:
 - [Feature engineering](docs/FEATURE_ENGINEERING.md)
 - [Modeling](docs/MODELING.md)
 - [Closing market benchmark](docs/MARKET_BENCHMARK.md)
+- [Match2Vec research candidate](docs/MATCH2VEC.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

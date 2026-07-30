@@ -30,6 +30,19 @@ jobs:
       - name: Mypy package
         run: >
           mypy src/fbai/core src/fbai/data src/fbai/features
-          src/fbai/models src/fbai/evaluation
+          src/fbai/models src/fbai/evaluation src/fbai/research
       - name: Tests
         run: pytest
+
+  match2vec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install optional CPU research environment
+        run: python -m pip install --upgrade pip && python -m pip install ".[dev,match2vec]"
+      - name: Match2Vec synthetic tests
+        run: pytest tests/research

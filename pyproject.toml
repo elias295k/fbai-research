@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "football-outcome-lab"
-version = "0.5.0"
-description = "Leakage-safe football research with aligned closing-market evaluation."
+version = "0.6.0"
+description = "Leakage-safe football research with isolated advanced-model experiments."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
@@ -32,6 +32,9 @@ dev = [
     "numpy>=1.26,<2.5",
     "pytest>=8,<10",
     "ruff>=0.8,<1",
+]
+match2vec = [
+    "torch>=2.2,<3",
 ]
 
 [tool.setuptools]

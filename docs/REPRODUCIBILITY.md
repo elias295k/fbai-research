@@ -13,8 +13,17 @@ python -m pip install -e ".[dev]"
 pytest
 ruff check .
 ruff format --check .
-mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/evaluation
+mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/evaluation src/fbai/research
 ```
+
+Match2Vec requires the isolated CPU research extra:
+
+```bash
+python -m pip install -e ".[dev,match2vec]"
+pytest tests/research
+```
+
+The normal core environment does not install or import PyTorch.
 
 ## Determinism controls
 
@@ -140,3 +149,24 @@ train-only LR52 fitting, separate market validation/de-vigging, exact-key
 alignment, H/D/A evaluation, and chronological reporting. Aggregate research
 records document separate offline historical reproductions; they are not
 required for public test execution.
+
+## Phase 5A synthetic Match2Vec path
+
+The research tests build invented multi-season, multi-division canonical rows,
+the exact 52-feature table, fold-local vocabularies, strictly-prior sequences,
+and fresh CPU networks. They check OOV mapping, same-date exclusion, future
+invariance, deterministic repeated fitting, finite 100-value representations,
+H/D/A probabilities, identical-row LR52 comparison, weighted aggregates, and
+the frozen gate. No model download, checkpoint, or provider request occurs.
+
+The local historical reproduction read the authorized FBAI canonical
+partitions, selected only the public canonical fields, rebuilt all 52 features,
+and ran `evaluate_match2vec_candidate`. The public inner validation split keeps
+whole dates together, while the older authority selected the last ten percent
+of rows and could divide a date. That mandated safety adaptation is recorded
+with exact fit/validation counts and reference differences.
+
+The committed Match2Vec record contains only aggregate/fold metrics,
+configuration, vocabulary sizes, OOV occurrence counts, and reference
+differences. Historical rows, natural keys, team tokens, vocabularies, learned
+representations, model weights, and predictions are not committed.

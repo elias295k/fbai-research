@@ -107,3 +107,33 @@ market_advantage_log_loss =
 
 Positive means the market has lower Log Loss; negative means LR52 has lower
 Log Loss; zero is a tie.
+
+## Match2Vec candidate protocol
+
+Match2Vec uses the same four expanding folds and public metric functions. A
+fresh vocabulary, inner-fit imputer/scaler, representation network, and
+candidate head are created in each fold. Team and league tokens come only from
+the outer training window. A test-only team maps to its training league's
+explicit unknown team token; a wholly unseen division fails.
+
+Every training and test sequence contains at most ten matches for that team in
+the same division, ordered chronologically and strictly earlier than the
+target date. Matches on the target date are excluded together through a date
+boundary, never through row order. Network parameters remain fixed throughout
+test prediction; earlier test results may appear in a later test date's
+historical descriptors because they were available by then.
+
+The predefined development gate is:
+
+```text
+candidate_improvement_log_loss =
+    lr52_log_loss - match2vec_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+Positive values favor Match2Vec. The 2025 historical-final result is reported
+but cannot tune the candidate or rescue a failed development gate. See
+[Match2Vec](MATCH2VEC.md).

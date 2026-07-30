@@ -1,0 +1,446 @@
+{
+  "all_historical_diagnostic": {
+    "candidate": {
+      "brier_score": 0.5912238379502799,
+      "ece": 0.015837441170043706,
+      "log_loss": 0.9910138810368786,
+      "n_samples": 12978
+    },
+    "candidate_improvement_log_loss": 0.004353589272712677,
+    "fold_count": 4,
+    "lr52": {
+      "brier_score": 0.593946658761011,
+      "ece": 0.017743215586817587,
+      "log_loss": 0.9953674703095913,
+      "n_samples": 12978
+    },
+    "name": "all_historical_diagnostic"
+  },
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "development": {
+    "candidate": {
+      "brier_score": 0.5888826698784677,
+      "ece": 0.014477027095716187,
+      "log_loss": 0.9879197492495337,
+      "n_samples": 9752
+    },
+    "candidate_improvement_log_loss": 0.0037639960892689173,
+    "fold_count": 3,
+    "improving_fold_count": 3,
+    "lr52": {
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024,
+      "log_loss": 0.9916837453388027,
+      "n_samples": 9752
+    },
+    "name": "development"
+  },
+  "disposition": "MATCH2VEC_REJECTED_FOR_NOW",
+  "downstream_model": {
+    "architecture": "joint representation plus exact LR52 numeric inputs to dropout and linear H/D/A head",
+    "batch_size": 512,
+    "early_stopping_min_delta": 1e-05,
+    "early_stopping_patience": 15,
+    "historical_runtime": "torch 2.12.1+cpu",
+    "learning_rate": 0.003,
+    "maximum_epochs": 300,
+    "numeric_feature_count": 52,
+    "numeric_preprocessing": "inner-fit median imputation then standard scaling",
+    "optimizer": "Adam",
+    "output_order": [
+      "H",
+      "D",
+      "A"
+    ],
+    "weight_decay": 0.0001
+  },
+  "experiment_id": "match2vec_sequence_hybrid_historical_reproduction",
+  "experiment_name": "Match2Vec M2V-SEQ plus LR52",
+  "folds": [
+    {
+      "candidate": {
+        "brier_score": 0.5905107013405942,
+        "ece": 0.013143920281358199,
+        "log_loss": 0.9909105383465022,
+        "n_samples": 3296
+      },
+      "candidate_improvement_log_loss": 0.005434066399949478,
+      "fold_name": "train_through_2021_test_2022",
+      "identical_test_rows": true,
+      "lr52": {
+        "brier_score": 0.5937116705262461,
+        "ece": 0.012548003925303818,
+        "log_loss": 0.9963446047464517,
+        "n_samples": 3296
+      },
+      "oov_occurrences": {
+        "away": 264,
+        "home": 264,
+        "total": 528
+      },
+      "representation_fit_rows": 8615,
+      "representation_validation_rows": 1024,
+      "role": "development",
+      "test_date_range": [
+        "2022-07-22",
+        "2023-06-04"
+      ],
+      "test_rows": 3296,
+      "test_year": 2022,
+      "train_date_range": [
+        "2019-07-26",
+        "2022-05-22"
+      ],
+      "train_rows": 9639,
+      "training_epochs": 32,
+      "vocabulary": {
+        "team_tokens": 217,
+        "total_tokens": 226,
+        "unknown_tokens": 9
+      }
+    },
+    {
+      "candidate": {
+        "brier_score": 0.5831707259909665,
+        "ece": 0.01635798994730146,
+        "log_loss": 0.9798512075534147,
+        "n_samples": 3228
+      },
+      "candidate_improvement_log_loss": 0.0022059838542773935,
+      "fold_name": "train_through_2022_test_2023",
+      "identical_test_rows": true,
+      "lr52": {
+        "brier_score": 0.5846906094684491,
+        "ece": 0.01548916415315726,
+        "log_loss": 0.9820571914076921,
+        "n_samples": 3228
+      },
+      "oov_occurrences": {
+        "away": 252,
+        "home": 252,
+        "total": 504
+      },
+      "representation_fit_rows": 11483,
+      "representation_validation_rows": 1452,
+      "role": "development",
+      "test_date_range": [
+        "2023-07-28",
+        "2024-06-02"
+      ],
+      "test_rows": 3228,
+      "test_year": 2023,
+      "train_date_range": [
+        "2019-07-26",
+        "2023-06-04"
+      ],
+      "train_rows": 12935,
+      "training_epochs": 32,
+      "vocabulary": {
+        "team_tokens": 231,
+        "total_tokens": 240,
+        "unknown_tokens": 9
+      }
+    },
+    {
+      "candidate": {
+        "brier_score": 0.5929322867216166,
+        "ece": 0.013957253853834731,
+        "log_loss": 0.9929344988565547,
+        "n_samples": 3228
+      },
+      "candidate_improvement_log_loss": 0.003616756854619152,
+      "fold_name": "train_through_2023_test_2024",
+      "identical_test_rows": true,
+      "lr52": {
+        "brier_score": 0.5948841337767327,
+        "ece": 0.01905105936931245,
+        "log_loss": 0.9965512557111739,
+        "n_samples": 3228
+      },
+      "oov_occurrences": {
+        "away": 172,
+        "home": 172,
+        "total": 344
+      },
+      "representation_fit_rows": 14553,
+      "representation_validation_rows": 1610,
+      "role": "development",
+      "test_date_range": [
+        "2024-07-26",
+        "2025-05-25"
+      ],
+      "test_rows": 3228,
+      "test_year": 2024,
+      "train_date_range": [
+        "2019-07-26",
+        "2024-06-02"
+      ],
+      "train_rows": 16163,
+      "training_epochs": 32,
+      "vocabulary": {
+        "team_tokens": 244,
+        "total_tokens": 253,
+        "unknown_tokens": 9
+      }
+    },
+    {
+      "candidate": {
+        "brier_score": 0.5983010453390937,
+        "ece": 0.019949889419529753,
+        "log_loss": 1.000367251523607,
+        "n_samples": 3226
+      },
+      "candidate_improvement_log_loss": 0.006135893279204829,
+      "fold_name": "train_through_2024_test_2025",
+      "identical_test_rows": true,
+      "lr52": {
+        "brier_score": 0.6025104774179937,
+        "ece": 0.023997950842338828,
+        "log_loss": 1.0065031448028119,
+        "n_samples": 3226
+      },
+      "oov_occurrences": {
+        "away": 165,
+        "home": 166,
+        "total": 331
+      },
+      "representation_fit_rows": 17469,
+      "representation_validation_rows": 1922,
+      "role": "historical_final",
+      "test_date_range": [
+        "2025-07-25",
+        "2026-05-24"
+      ],
+      "test_rows": 3226,
+      "test_year": 2025,
+      "train_date_range": [
+        "2019-07-26",
+        "2025-05-25"
+      ],
+      "train_rows": 19391,
+      "training_epochs": 27,
+      "vocabulary": {
+        "team_tokens": 253,
+        "total_tokens": 262,
+        "unknown_tokens": 9
+      }
+    }
+  ],
+  "generated_at_utc": "2026-07-30T16:26:38Z",
+  "historical_final": {
+    "candidate": {
+      "brier_score": 0.5983010453390937,
+      "ece": 0.019949889419529753,
+      "log_loss": 1.000367251523607,
+      "n_samples": 3226
+    },
+    "candidate_improvement_log_loss": 0.006135893279204829,
+    "fold_count": 1,
+    "lr52": {
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828,
+      "log_loss": 1.0065031448028119,
+      "n_samples": 3226
+    },
+    "name": "historical_final"
+  },
+  "limitations": [
+    "The historical archive and learned parameters are not redistributed.",
+    "The authority stores fold metrics but no natural-key probability rows.",
+    "The public whole-date inner validation boundary differs from the authority row-count boundary.",
+    "The 2025 fold was historically examined and is not currently unseen.",
+    "External-market inputs are excluded from this candidate."
+  ],
+  "protocol": {
+    "aggregation": "test-sample-count-weighted",
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "historical_row_count": 22617,
+    "inner_validation": "chronological final ten percent of dates with an indivisible date boundary",
+    "outer_split": "expanding SeasonStartYear with strict train dates before test dates",
+    "same_date_policy": "all target-date contexts are derived before any result from that date is available",
+    "test_state_policy": "fixed network; earlier test-date descriptors may inform later test dates"
+  },
+  "reference_comparison": {
+    "absolute_differences": {
+      "all_historical_diagnostic": {
+        "brier_score": 0.00016353008942904257,
+        "ece": 0.00031005948534772003,
+        "log_loss": 3.9176481015035236e-05
+      },
+      "development": {
+        "brier_score": 0.0004277343455413307,
+        "ece": 0.0005422680775023225,
+        "log_loss": 0.00046690183437880783
+      },
+      "folds": {
+        "2022": {
+          "brier_score": 0.0017315330167229082,
+          "ece": 0.004685962278342894,
+          "log_loss": 0.0023654616763859604
+        },
+        "2023": {
+          "brier_score": 6.485834249669864e-05,
+          "ece": 0.004326510994560363,
+          "log_loss": 0.0003276084056180739
+        },
+        "2024": {
+          "brier_score": 0.0004109370371192522,
+          "ece": 0.002096391719572476,
+          "log_loss": 0.000677142212877957
+        },
+        "2025": {
+          "brier_score": 0.0006351431609143976,
+          "ece": 0.0003918928366273798,
+          "log_loss": 0.0012538110099962196
+        }
+      },
+      "historical_final": {
+        "brier_score": 0.0006351431609143976,
+        "ece": 0.0003918928366273798,
+        "log_loss": 0.0012538110099962196
+      }
+    },
+    "authoritative_references": [
+      "FBAI_NEW/results/match2vec_dev.json",
+      "FBAI_NEW/results/final_oos.json"
+    ],
+    "comparison_tolerances": {
+      "brier_score": 0.003,
+      "ece": 0.005,
+      "log_loss": 0.003
+    },
+    "differences_from_reference": [
+      "The public inner split preserves whole dates; the authority split used the final ten percent of rows.",
+      "The public port requests deterministic Torch algorithms and validates normalized probabilities."
+    ],
+    "match_level_probability_parity": "unavailable",
+    "match_level_probability_parity_limitation": "The committed authority has no natural-key probability rows.",
+    "reference_values": {
+      "all_historical_diagnostic": {
+        "brier_score": 0.5913873680397089,
+        "ece": 0.015527381684695985,
+        "log_loss": 0.9910530575178936,
+        "n_samples": 12978
+      },
+      "development": {
+        "brier_score": 0.589310404224009,
+        "ece": 0.013934759018213864,
+        "log_loss": 0.9883866510839125,
+        "n_samples": 9752
+      },
+      "folds": {
+        "2022": {
+          "brier_score": 0.5922422343573172,
+          "ece": 0.017829882559701093,
+          "log_loss": 0.9932760000228882,
+          "n_samples": 3296
+        },
+        "2023": {
+          "brier_score": 0.5831058676484698,
+          "ece": 0.012031478952741096,
+          "log_loss": 0.9795235991477966,
+          "n_samples": 3228
+        },
+        "2024": {
+          "brier_score": 0.5925213496844973,
+          "ece": 0.011860862134262256,
+          "log_loss": 0.9922573566436768,
+          "n_samples": 3228
+        },
+        "2025": {
+          "brier_score": 0.5976659021781793,
+          "ece": 0.020341782256157133,
+          "log_loss": 0.9991134405136108,
+          "n_samples": 3226
+        }
+      },
+      "historical_final": {
+        "brier_score": 0.5976659021781793,
+        "ece": 0.020341782256157133,
+        "log_loss": 0.9991134405136108,
+        "n_samples": 3226
+      }
+    },
+    "reproduction_passed": true,
+    "verdict": "pass_with_same_date_protocol_adaptation"
+  },
+  "representation": {
+    "descriptor_count": 13,
+    "descriptor_semantics": "team-perspective venue, goals, goal difference, shots, shots on target, corners, points, recency, same-season",
+    "device": "cpu",
+    "dropout": 0.1,
+    "encoder": "shared Linear(13,32) then ReLU with learned scalar attention",
+    "feature_components": [
+      {
+        "count": 32,
+        "name": "home_state",
+        "public_pattern": "M2VHomeState_000_pre through M2VHomeState_031_pre"
+      },
+      {
+        "count": 32,
+        "name": "away_state",
+        "public_pattern": "M2VAwayState_000_pre through M2VAwayState_031_pre"
+      },
+      {
+        "count": 32,
+        "name": "state_difference",
+        "public_pattern": "M2VStateDiff_000_pre through M2VStateDiff_031_pre"
+      },
+      {
+        "count": 4,
+        "name": "league_embedding",
+        "public_pattern": "M2VLeague_000_pre through M2VLeague_003_pre"
+      }
+    ],
+    "feature_count": 100,
+    "league_embedding_dimension": 4,
+    "negative_sample_count": 0,
+    "padding": "zero descriptor with Boolean validity mask",
+    "random_seed": 42,
+    "sequence_direction": "oldest_to_newest",
+    "sequence_group": "team within division",
+    "sequence_length": 10,
+    "variant": "M2V-SEQ"
+  },
+  "schema_version": "1.0",
+  "source_authority": {
+    "design": "FBAI_NEW/reports/MATCH2VEC_DESIGN.md",
+    "executable_package": "FBAI_NEW/src/fbai_new/match2vec",
+    "final_result": "FBAI_NEW/results/final_oos.json",
+    "selected_development_result": "FBAI_NEW/results/match2vec_dev.json"
+  },
+  "status": "reproduced",
+  "success_gate": {
+    "definition": {
+      "development_fold_count": 3,
+      "improvement_sign_convention": "lr52_log_loss_minus_candidate_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "primary_metric": "development_sample_count_weighted_log_loss"
+    },
+    "disposition": "MATCH2VEC_REJECTED_FOR_NOW",
+    "observed": {
+      "candidate_improvement_log_loss": 0.0037639960892689173,
+      "historical_final_improvement_log_loss": 0.006135893279204829,
+      "improving_fold_count": 3
+    },
+    "passed": false
+  },
+  "verdict": "failed_gate",
+  "vocabulary_policy": {
+    "minimum_frequency": 1,
+    "oov": "test-only team maps to one training-league unknown ID; unseen division fails",
+    "reserved_tokens": "one unknown-team ID per training league",
+    "team_token": "division and team identity pair",
+    "training_scope": "current outer training fold only"
+  }
+}

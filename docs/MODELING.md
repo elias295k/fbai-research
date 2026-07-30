@@ -114,3 +114,19 @@ evaluation-only path. LR52 is fitted first on complete training history;
 same-match comparison restricts only test metrics to exact
 market-covered keys. See [Closing market benchmark](MARKET_BENCHMARK.md) for
 the source triplet, timing, transformation, validation, and coverage contract.
+
+## Phase 5A experimental boundary
+
+LR52 remains unchanged and is still the default internal model. Advanced
+candidates live under `fbai.research`, use separate input contracts, and must
+pass an explicitly recorded gate before their disposition can change.
+
+The first candidate is the source-selected Match2Vec sequence hybrid. It
+attention-pools strictly-prior match descriptors into 32-value home and away
+states, adds their difference and a four-value league embedding, and supplies
+that 100-value learned representation together with the exact 52 LR52 numeric
+inputs to a linear three-class head. The representation and head are fitted
+jointly inside each fold; this is not a second Logistic Regression.
+
+The candidate failed its development improvement threshold and remains
+experimental. Full semantics and results are in [Match2Vec](MATCH2VEC.md).
