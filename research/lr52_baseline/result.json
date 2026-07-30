@@ -1,0 +1,316 @@
+{
+  "all_historical_diagnostic": {
+    "fold_count": 4,
+    "model": {
+      "brier_score": 0.593946658761011,
+      "ece": 0.017743215586817587,
+      "log_loss": 0.9953674703095913,
+      "n_samples": 12978
+    },
+    "name": "all_historical_diagnostic",
+    "training_prior": {
+      "brier_score": 0.6491454216908891,
+      "ece": 0.008348150388458498,
+      "log_loss": 1.0728683644998085,
+      "n_samples": 12978
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666669,
+      "ece": 0.10394513792572048,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 12978
+    }
+  },
+  "baselines": {
+    "training_prior": {
+      "definition": "Per-fold H/D/A frequencies fitted from training labels only",
+      "probability_order": [
+        "H",
+        "D",
+        "A"
+      ]
+    },
+    "uniform": {
+      "definition": "Exactly one-third probability for each H/D/A class",
+      "probability_order": [
+        "H",
+        "D",
+        "A"
+      ]
+    }
+  },
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "development": {
+    "fold_count": 3,
+    "model": {
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024,
+      "log_loss": 0.9916837453388027,
+      "n_samples": 9752
+    },
+    "name": "development",
+    "training_prior": {
+      "brier_score": 0.6484714680137853,
+      "ece": 0.010684449658221679,
+      "log_loss": 1.0718691334198707,
+      "n_samples": 9752
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666669,
+      "ece": 0.10616625649439435,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 9752
+    }
+  },
+  "experiment_id": "lr52_baseline_historical_reproduction",
+  "feature_count": 52,
+  "folds": [
+    {
+      "fold_name": "train_through_2021_test_2022",
+      "model": {
+        "brier_score": 0.5937116705262461,
+        "ece": 0.012548003925303818,
+        "log_loss": 0.9963446047464517,
+        "n_samples": 3296
+      },
+      "model_configuration_id": "lr52_median_standardized_lbfgs_l2_c1_iter2000_seed42",
+      "model_iterations": [
+        73
+      ],
+      "preprocessing_fit_rows": 9639,
+      "role": "development",
+      "test_date_range": [
+        "2022-07-22",
+        "2023-06-04"
+      ],
+      "test_rows": 3296,
+      "test_year": 2022,
+      "train_date_range": [
+        "2019-07-26",
+        "2022-05-22"
+      ],
+      "train_rows": 9639,
+      "training_prior": {
+        "brier_score": 0.6446376908328686,
+        "ece": 0.026132333551903253,
+        "log_loss": 1.0659669396764104,
+        "n_samples": 3296
+      },
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.11690938511326865,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3296
+      }
+    },
+    {
+      "fold_name": "train_through_2022_test_2023",
+      "model": {
+        "brier_score": 0.5846906094684491,
+        "ece": 0.01548916415315726,
+        "log_loss": 0.9820571914076921,
+        "n_samples": 3228
+      },
+      "model_configuration_id": "lr52_median_standardized_lbfgs_l2_c1_iter2000_seed42",
+      "model_iterations": [
+        72
+      ],
+      "preprocessing_fit_rows": 12935,
+      "role": "development",
+      "test_date_range": [
+        "2023-07-28",
+        "2024-06-02"
+      ],
+      "test_rows": 3228,
+      "test_year": 2023,
+      "train_date_range": [
+        "2019-07-26",
+        "2023-06-04"
+      ],
+      "train_rows": 12935,
+      "training_prior": {
+        "brier_score": 0.6498662547567463,
+        "ece": 0.004484796492231269,
+        "log_loss": 1.0740009181527719,
+        "n_samples": 3228
+      },
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.10192069392812891,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3228
+      }
+    },
+    {
+      "fold_name": "train_through_2023_test_2024",
+      "model": {
+        "brier_score": 0.5948841337767327,
+        "ece": 0.01905105936931245,
+        "log_loss": 0.9965512557111739,
+        "n_samples": 3228
+      },
+      "model_configuration_id": "lr52_median_standardized_lbfgs_l2_c1_iter2000_seed42",
+      "model_iterations": [
+        74
+      ],
+      "preprocessing_fit_rows": 16163,
+      "role": "development",
+      "test_date_range": [
+        "2024-07-26",
+        "2025-05-25"
+      ],
+      "test_rows": 3228,
+      "test_year": 2024,
+      "train_date_range": [
+        "2019-07-26",
+        "2024-06-02"
+      ],
+      "train_rows": 16163,
+      "training_prior": {
+        "brier_score": 0.6509912195571632,
+        "ece": 0.001110798823724335,
+        "log_loss": 1.0757638761276276,
+        "n_samples": 3228
+      },
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.09944237918215615,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3228
+      }
+    },
+    {
+      "fold_name": "train_through_2024_test_2025",
+      "model": {
+        "brier_score": 0.6025104774179937,
+        "ece": 0.023997950842338828,
+        "log_loss": 1.0065031448028119,
+        "n_samples": 3226
+      },
+      "model_configuration_id": "lr52_median_standardized_lbfgs_l2_c1_iter2000_seed42",
+      "model_iterations": [
+        74
+      ],
+      "preprocessing_fit_rows": 19391,
+      "role": "historical_final",
+      "test_date_range": [
+        "2025-07-25",
+        "2026-05-24"
+      ],
+      "test_rows": 3226,
+      "test_year": 2025,
+      "train_date_range": [
+        "2019-07-26",
+        "2025-05-25"
+      ],
+      "train_rows": 19391,
+      "training_prior": {
+        "brier_score": 0.6511827422919783,
+        "ece": 0.001285661089409973,
+        "log_loss": 1.0758889787253365,
+        "n_samples": 3226
+      },
+      "uniform": {
+        "brier_score": 0.6666666666666667,
+        "ece": 0.0972308328166977,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3226
+      }
+    }
+  ],
+  "generated_at_utc": "2026-07-30T12:57:47Z",
+  "historical_final": {
+    "fold_count": 1,
+    "model": {
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828,
+      "log_loss": 1.0065031448028119,
+      "n_samples": 3226
+    },
+    "name": "historical_final",
+    "training_prior": {
+      "brier_score": 0.6511827422919783,
+      "ece": 0.001285661089409973,
+      "log_loss": 1.0758889787253365,
+      "n_samples": 3226
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666667,
+      "ece": 0.09723083281669771,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 3226
+    }
+  },
+  "historical_row_count": 22617,
+  "limitations": [
+    "The historical archive is read-only, local, and not redistributed.",
+    "No committed match-level reference predictions were available for key-aligned parity.",
+    "This record is an offline historical reproduction, not a currently unseen final estimate.",
+    "No market comparison or model tuning is part of this phase."
+  ],
+  "model_configuration": {
+    "class_weight": null,
+    "fit_intercept": true,
+    "max_iter": 2000,
+    "penalty": "l2",
+    "random_state": 42,
+    "regularization_c": 1.0,
+    "solver": "lbfgs",
+    "tolerance": 0.0001
+  },
+  "model_name": "LR52",
+  "preprocessing": {
+    "imputer": "SimpleImputer(strategy=median), fitted independently on each training fold",
+    "scaler": "StandardScaler(), fitted independently after imputation on each training fold",
+    "test_behavior": "transform only"
+  },
+  "protocol": {
+    "aggregation": "sample-count-weighted",
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "split": "expanding SeasonStartYear, strict train dates before test dates"
+  },
+  "reference_comparison": {
+    "absolute_difference": 1.601368704307049e-09,
+    "comparison_metric": "all-fold sample-count-weighted multiclass log loss",
+    "fold_log_loss_comparisons": {
+      "2022": {
+        "absolute_difference": 2.174449509340093e-11,
+        "reference": 0.9963446047247072,
+        "reproduced": 0.9963446047464517
+      },
+      "2023": {
+        "absolute_difference": 6.634087834633817e-09,
+        "reference": 0.9820571847736043,
+        "reproduced": 0.9820571914076921
+      },
+      "2024": {
+        "absolute_difference": 1.284916617549925e-11,
+        "reference": 0.996551255724023,
+        "reproduced": 0.9965512557111739
+      },
+      "2025": {
+        "absolute_difference": 2.0535217970518715e-10,
+        "reference": 1.006503145008164,
+        "reproduced": 1.0065031448028119
+      }
+    },
+    "match_level_prediction_parity": "unavailable",
+    "match_level_prediction_parity_limitation": "The committed reference contains fold and aggregate metrics but no match-level probability arrays.",
+    "reference_artifact": "FBAI_NEW/results/baseline.json",
+    "reference_weighted_log_loss": 0.9953674687082226,
+    "reproduced_weighted_log_loss": 0.9953674703095913,
+    "tolerance": 1e-08,
+    "verdict": "pass"
+  },
+  "schema_version": "1.0",
+  "status": "reproduced"
+}

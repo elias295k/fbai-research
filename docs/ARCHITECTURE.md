@@ -2,10 +2,17 @@
 
 The package now has a canonical historical-match layer and a closed,
 leakage-safe pre-match feature layer alongside the Phase 1 evaluation
-contracts.
+contracts and the Phase 3 probabilistic baseline.
 
 ```text
 src/fbai/
+├── models/
+│   ├── preprocessing.py fixed 52-column selection and train-only transforms
+│   └── logistic.py      source-verified LR52 fit and H/D/A prediction
+├── evaluation/
+│   ├── baselines.py     uniform and train-fitted class-prior references
+│   ├── report.py        immutable JSON-safe fold and aggregate records
+│   └── runner.py        expanding chronological LR52 evaluation
 ├── features/
 │   ├── schema.py    exact 3/13/36 model-input contract
 │   ├── labels.py    source-verified target construction
@@ -39,7 +46,9 @@ synthetic/source CSV
     -> per-division Parquet partitions
     -> DuckDB query layer
     -> 52-feature pre-match table
-    -> future evaluation layer
+    -> train-only median imputation and scaling
+    -> LR52
+    -> chronological evaluation report
 ```
 
 The canonical schema contains match identity, full-time result and goals, and
@@ -93,3 +102,16 @@ after the complete date batch has been processed.
 non-finite, negative, out-of-range, or non-normalized probability matrices
 before computing log loss, Brier score, calibration error, or weighted fold
 summaries.
+
+## Model boundary
+
+`models.preprocessing` selects the fixed feature tuple without numeric-column
+discovery and rejects unknown columns or infinities. `fit_lr52` repeats the
+semantic guard immediately before fitting a single encapsulated
+imputer/scaler/classifier pipeline. Prediction explicitly maps
+scikit-learn's class order to named H/D/A columns.
+
+`evaluation.runner` uses the existing expanding-fold generator. It creates a
+new pipeline and training-prior baseline per fold, validates probabilities,
+and produces immutable aggregate-only records. No fitted model or match-level
+prediction is written to disk.

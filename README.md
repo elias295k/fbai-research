@@ -1,7 +1,7 @@
 # FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-research. Phase 2B adds deterministic pre-match feature engineering:
+research. Phase 3 adds a reproducible probabilistic LR52 baseline:
 
 - source-shaped CSV normalization into one canonical schema;
 - strict match and natural-key integrity validation;
@@ -13,11 +13,16 @@ research. Phase 2B adds deterministic pre-match feature engineering:
 - semantic model-input and feature-table validation;
 - deterministic chronological folds and same-date match batching;
 - H/D/A-order-safe probabilistic metrics;
+- train-only median imputation and standard scaling in every fold;
+- multinomial Logistic Regression on the fixed 52-feature tuple;
+- uniform and training-prior reference probabilities;
+- separated development, historical-final, and diagnostic reports;
 - deterministic, wholly synthetic raw and canonical matches;
 - tests and CI for those guarantees.
 
-No third-party football data is committed. Phase 2B builds the 52-feature
-table but does not train or evaluate a model.
+No third-party football data is committed. CI trains and evaluates only on
+invented synthetic data. The aggregate historical LR52 result is an offline
+reproduction record, not a live forecast or market-superiority claim.
 
 ## Install
 
@@ -28,22 +33,20 @@ python -m pip install -e ".[dev]"
 pytest
 ruff check .
 ruff format --check .
-mypy src/fbai/core src/fbai/data src/fbai/features
+mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/evaluation
 ```
 
 ## Small example
 
 ```python
-from fbai.core.leakage import validate_feature_table
-from fbai.core.splits import ALL_TEST_YEARS, expanding_folds
-from fbai.testing.synthetic import SYNTHETIC_FEATURE_COLUMNS, make_synthetic_fixtures
+from fbai.evaluation import evaluate_lr52
+from fbai.features import build_feature_table
+from fbai.testing.synthetic import make_synthetic_canonical_matches
 
-matches = make_synthetic_fixtures(seed=42)
-validate_feature_table(
-    matches,
-    approved_pre_features=SYNTHETIC_FEATURE_COLUMNS,
-)
-folds = expanding_folds(matches, test_years=ALL_TEST_YEARS)
+canonical = make_synthetic_canonical_matches(seed=42)
+features = build_feature_table(canonical)
+report = evaluate_lr52(features)
+print(report.development.model.log_loss)
 ```
 
 The development folds are 2022–2024. The 2025 fold is **the historically
@@ -65,7 +68,9 @@ The implemented data path is:
 source-shaped CSV
     -> canonical match table
     -> 52-feature pre-match table
-    -> future evaluation layer
+    -> train-only preprocessing
+    -> LR52
+    -> chronological evaluation report
 ```
 
 See:
@@ -74,6 +79,7 @@ See:
 - [Evaluation protocol](docs/EVALUATION_PROTOCOL.md)
 - [Data sources](docs/DATA_SOURCES.md)
 - [Feature engineering](docs/FEATURE_ENGINEERING.md)
+- [Modeling](docs/MODELING.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 
