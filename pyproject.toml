@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "football-outcome-lab"
-version = "0.2.0"
-description = "Leakage-safe canonical data and evaluation foundations for football research."
+version = "0.3.0"
+description = "Leakage-safe canonical data and pre-match feature foundations for football research."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
@@ -41,7 +41,7 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.pytest.ini_options]
-addopts = "-q --strict-markers"
+addopts = "-q --strict-markers --import-mode=importlib"
 testpaths = ["tests"]
 
 [tool.ruff]

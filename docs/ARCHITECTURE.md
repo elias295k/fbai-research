@@ -1,10 +1,19 @@
 # Architecture
 
-The package now has a canonical historical-match layer alongside the Phase 1
-evaluation contracts.
+The package now has a canonical historical-match layer and a closed,
+leakage-safe pre-match feature layer alongside the Phase 1 evaluation
+contracts.
 
 ```text
 src/fbai/
+├── features/
+│   ├── schema.py    exact 3/13/36 model-input contract
+│   ├── labels.py    source-verified target construction
+│   ├── elo.py       per-division date-batched Elo state
+│   ├── context.py   rest, congestion, match number, progress, form
+│   ├── rolling.py   prior-match team-perspective rolling statistics
+│   ├── checks.py    closed schema and semantic leakage validation
+│   └── build.py     orchestration and verified feature partitions
 ├── data/
 │   ├── sources.py   supported public source coordinates
 │   ├── acquire.py   credential-free atomic CSV acquisition
@@ -29,6 +38,8 @@ synthetic/source CSV
     -> canonical validator
     -> per-division Parquet partitions
     -> DuckDB query layer
+    -> 52-feature pre-match table
+    -> future evaluation layer
 ```
 
 The canonical schema contains match identity, full-time result and goals, and
@@ -51,7 +62,16 @@ same-match values, odds, and unknown columns. A valid predictive feature:
    `FTHG`, `FTR`, `MatchDate`, or `AvgH`.
 
 Feature-table checks separately enforce natural-key uniqueness, non-null keys,
-target domains, and a closed column schema.
+target domains, stable order, finite numeric values, and the exact 52-column
+model schema. The feature builder and writer both invoke this semantic guard.
+
+## Feature-state boundary
+
+Elo carries across seasons within each division, with a 30 percent reversion
+toward 1500 at a transition. Context and rolling histories reset per division,
+season, and team. Rolling values are all-venue team-perspective histories with
+shift-before-window semantics. Legitimate first-appearance values remain
+missing; model-time imputation is outside this layer.
 
 ## Chronology boundary
 

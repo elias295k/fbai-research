@@ -1,20 +1,23 @@
 # FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-research. Phase 2A adds a deterministic historical-match data contract:
+research. Phase 2B adds deterministic pre-match feature engineering:
 
 - source-shaped CSV normalization into one canonical schema;
 - strict match and natural-key integrity validation;
 - atomic, per-division Parquet partitions with read-back verification;
 - an in-memory DuckDB query layer over those partitions;
+- exactly 52 approved pre-match features (3 Elo, 13 context, 36 rolling);
+- date-batched state updates and truncation-invariance tests;
+- validated, atomic per-division feature Parquet partitions;
 - semantic model-input and feature-table validation;
 - deterministic chronological folds and same-date match batching;
 - H/D/A-order-safe probabilistic metrics;
 - deterministic, wholly synthetic raw and canonical matches;
 - tests and CI for those guarantees.
 
-No third-party football data is committed. Phase 2A does not build the
-52-feature table and does not train a model.
+No third-party football data is committed. Phase 2B builds the 52-feature
+table but does not train or evaluate a model.
 
 ## Install
 
@@ -25,7 +28,7 @@ python -m pip install -e ".[dev]"
 pytest
 ruff check .
 ruff format --check .
-mypy src/fbai/core src/fbai/data
+mypy src/fbai/core src/fbai/data src/fbai/features
 ```
 
 ## Small example
@@ -56,11 +59,21 @@ Matches sharing a date are processed as a batch. Their stable display order is
 `MatchDate, Division, HomeTeam, AwayTeam`, but no match on a date may consume
 another match's result from that same date.
 
+The implemented data path is:
+
+```text
+source-shaped CSV
+    -> canonical match table
+    -> 52-feature pre-match table
+    -> future evaluation layer
+```
+
 See:
 
 - [Architecture](docs/ARCHITECTURE.md)
 - [Evaluation protocol](docs/EVALUATION_PROTOCOL.md)
 - [Data sources](docs/DATA_SOURCES.md)
+- [Feature engineering](docs/FEATURE_ENGINEERING.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

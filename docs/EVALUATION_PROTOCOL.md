@@ -26,6 +26,10 @@ the same calendar date form one indivisible batch. No result from one match may
 be added to history before all feature/model inputs for that date have been
 created.
 
+The Phase 2B Elo, context, form, and rolling builders all implement this rule
+directly: they calculate a complete date from pre-date state and update history
+only after the date batch is complete.
+
 Chronological inner train/validation splitting chooses a date boundary and
 moves the complete boundary date into validation. Therefore:
 
@@ -42,3 +46,13 @@ The class/probability-column order is always `H, D, A`.
 - Multiple folds: sample-count-weighted means.
 
 Invalid probability matrices fail rather than being silently renormalized.
+
+## Future Phase 3 fit boundary
+
+Model validation will consume only the immutable 52-name tuple exported by the
+feature schema. Labels, metadata, same-match statistics, odds, and arbitrary
+`_pre` aliases are rejected by the semantic fit-time guard.
+
+Phase 2B deliberately preserves early-season missing feature values. Any model
+imputer in Phase 3 must be fitted on training rows only and then applied to
+validation or test rows; no full-history imputation is permitted.
