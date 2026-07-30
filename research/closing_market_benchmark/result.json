@@ -1,0 +1,527 @@
+{
+  "aligned_comparison": {
+    "definition": "market_advantage_log_loss = lr52_aligned_log_loss - market_log_loss",
+    "negative_interpretation": "LR52 has lower log loss",
+    "positive_interpretation": "closing market has lower log loss",
+    "training_policy": "LR52 fits on the complete valid fold training history; only test evaluation is restricted to identical market-covered keys",
+    "zero_interpretation": "tie"
+  },
+  "all_historical_diagnostic": {
+    "aligned_lr52": {
+      "brier_score": 0.593946658761011,
+      "ece": 0.017743215586817587,
+      "log_loss": 0.9953674703095913,
+      "n_samples": 12978
+    },
+    "aligned_rows": 12978,
+    "candidate_test_rows": 12978,
+    "coverage_percentage": 100.0,
+    "fold_count": 4,
+    "full_test_lr52": {
+      "brier_score": 0.593946658761011,
+      "ece": 0.017743215586817587,
+      "log_loss": 0.9953674703095913,
+      "n_samples": 12978
+    },
+    "market": {
+      "brier_score": 0.5778341192564093,
+      "ece": 0.02158208354296355,
+      "log_loss": 0.970915203320691,
+      "n_samples": 12978
+    },
+    "market_advantage_log_loss": 0.02445226698890024,
+    "name": "all_historical_diagnostic",
+    "training_prior": {
+      "brier_score": 0.6491454216908891,
+      "ece": 0.008348150388458498,
+      "log_loss": 1.0728683644998085,
+      "n_samples": 12978
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666669,
+      "ece": 0.10394513792572048,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 12978
+    }
+  },
+  "benchmark_name": "closing market benchmark",
+  "canonical_market_columns": [
+    "MatchDate",
+    "Division",
+    "HomeTeam",
+    "AwayTeam",
+    "ClosingHomeOdds",
+    "ClosingDrawOdds",
+    "ClosingAwayOdds"
+  ],
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "coverage": {
+    "aligned_rows": 22617,
+    "by_division": [
+      {
+        "aligned_rows": 2085,
+        "candidate_match_rows": 2085,
+        "coverage_percentage": 100.0,
+        "name": "B1"
+      },
+      {
+        "aligned_rows": 2142,
+        "candidate_match_rows": 2142,
+        "coverage_percentage": 100.0,
+        "name": "D1"
+      },
+      {
+        "aligned_rows": 2660,
+        "candidate_match_rows": 2660,
+        "coverage_percentage": 100.0,
+        "name": "E0"
+      },
+      {
+        "aligned_rows": 3864,
+        "candidate_match_rows": 3864,
+        "coverage_percentage": 100.0,
+        "name": "E1"
+      },
+      {
+        "aligned_rows": 2336,
+        "candidate_match_rows": 2336,
+        "coverage_percentage": 100.0,
+        "name": "F1"
+      },
+      {
+        "aligned_rows": 2660,
+        "candidate_match_rows": 2660,
+        "coverage_percentage": 100.0,
+        "name": "I1"
+      },
+      {
+        "aligned_rows": 2068,
+        "candidate_match_rows": 2068,
+        "coverage_percentage": 100.0,
+        "name": "N1"
+      },
+      {
+        "aligned_rows": 2142,
+        "candidate_match_rows": 2142,
+        "coverage_percentage": 100.0,
+        "name": "P1"
+      },
+      {
+        "aligned_rows": 2660,
+        "candidate_match_rows": 2660,
+        "coverage_percentage": 100.0,
+        "name": "SP1"
+      }
+    ],
+    "by_test_year": [
+      {
+        "aligned_rows": 3047,
+        "candidate_match_rows": 3047,
+        "coverage_percentage": 100.0,
+        "name": "2019"
+      },
+      {
+        "aligned_rows": 3296,
+        "candidate_match_rows": 3296,
+        "coverage_percentage": 100.0,
+        "name": "2020"
+      },
+      {
+        "aligned_rows": 3296,
+        "candidate_match_rows": 3296,
+        "coverage_percentage": 100.0,
+        "name": "2021"
+      },
+      {
+        "aligned_rows": 3296,
+        "candidate_match_rows": 3296,
+        "coverage_percentage": 100.0,
+        "name": "2022"
+      },
+      {
+        "aligned_rows": 3228,
+        "candidate_match_rows": 3228,
+        "coverage_percentage": 100.0,
+        "name": "2023"
+      },
+      {
+        "aligned_rows": 3228,
+        "candidate_match_rows": 3228,
+        "coverage_percentage": 100.0,
+        "name": "2024"
+      },
+      {
+        "aligned_rows": 3226,
+        "candidate_match_rows": 3226,
+        "coverage_percentage": 100.0,
+        "name": "2025"
+      }
+    ],
+    "candidate_match_rows": 22617,
+    "coverage_percentage": 100.0,
+    "duplicate_market_keys": 0,
+    "incomplete_odds_rows": 0,
+    "invalid_odds_rows": 0,
+    "supplied_market_rows": 22617,
+    "unmatched_market_keys": 0,
+    "unmatched_match_keys": 0,
+    "valid_market_rows": 22617
+  },
+  "development": {
+    "aligned_lr52": {
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024,
+      "log_loss": 0.9916837453388027,
+      "n_samples": 9752
+    },
+    "aligned_rows": 9752,
+    "candidate_test_rows": 9752,
+    "coverage_percentage": 100.0,
+    "fold_count": 3,
+    "full_test_lr52": {
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024,
+      "log_loss": 0.9916837453388027,
+      "n_samples": 9752
+    },
+    "market": {
+      "brier_score": 0.5745910875645648,
+      "ece": 0.022649469885875205,
+      "log_loss": 0.9663318418439923,
+      "n_samples": 9752
+    },
+    "market_advantage_log_loss": 0.025351903494810313,
+    "name": "development",
+    "training_prior": {
+      "brier_score": 0.6484714680137853,
+      "ece": 0.010684449658221679,
+      "log_loss": 1.0718691334198707,
+      "n_samples": 9752
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666669,
+      "ece": 0.10616625649439435,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 9752
+    }
+  },
+  "experiment_id": "closing_market_benchmark_historical_reproduction",
+  "folds": [
+    {
+      "aligned_lr52": {
+        "brier_score": 0.5937116705262461,
+        "ece": 0.012548003925303818,
+        "log_loss": 0.9963446047464517,
+        "n_samples": 3296
+      },
+      "aligned_rows": 3296,
+      "candidate_test_rows": 3296,
+      "coverage_percentage": 100.0,
+      "fold_name": "train_through_2021_test_2022",
+      "full_test_lr52": {
+        "brier_score": 0.5937116705262461,
+        "ece": 0.012548003925303818,
+        "log_loss": 0.9963446047464517,
+        "n_samples": 3296
+      },
+      "market": {
+        "brier_score": 0.5794222313023628,
+        "ece": 0.022623665709304033,
+        "log_loss": 0.9737595977780705,
+        "n_samples": 3296
+      },
+      "market_advantage_log_loss": 0.02258500696838117,
+      "role": "development",
+      "test_date_range": [
+        "2022-07-22",
+        "2023-06-04"
+      ],
+      "test_year": 2022,
+      "training_prior": {
+        "brier_score": 0.6446376908328686,
+        "ece": 0.026132333551903253,
+        "log_loss": 1.0659669396764104,
+        "n_samples": 3296
+      },
+      "unaligned_rows": 0,
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.11690938511326865,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3296
+      }
+    },
+    {
+      "aligned_lr52": {
+        "brier_score": 0.5846906094684491,
+        "ece": 0.01548916415315726,
+        "log_loss": 0.9820571914076921,
+        "n_samples": 3228
+      },
+      "aligned_rows": 3228,
+      "candidate_test_rows": 3228,
+      "coverage_percentage": 100.0,
+      "fold_name": "train_through_2022_test_2023",
+      "full_test_lr52": {
+        "brier_score": 0.5846906094684491,
+        "ece": 0.01548916415315726,
+        "log_loss": 0.9820571914076921,
+        "n_samples": 3228
+      },
+      "market": {
+        "brier_score": 0.5667261805076442,
+        "ece": 0.02496891752746364,
+        "log_loss": 0.9548166753218867,
+        "n_samples": 3228
+      },
+      "market_advantage_log_loss": 0.027240516085805355,
+      "role": "development",
+      "test_date_range": [
+        "2023-07-28",
+        "2024-06-02"
+      ],
+      "test_year": 2023,
+      "training_prior": {
+        "brier_score": 0.6498662547567463,
+        "ece": 0.004484796492231269,
+        "log_loss": 1.0740009181527719,
+        "n_samples": 3228
+      },
+      "unaligned_rows": 0,
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.10192069392812891,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3228
+      }
+    },
+    {
+      "aligned_lr52": {
+        "brier_score": 0.5948841337767327,
+        "ece": 0.01905105936931245,
+        "log_loss": 0.9965512557111739,
+        "n_samples": 3228
+      },
+      "aligned_rows": 3228,
+      "candidate_test_rows": 3228,
+      "coverage_percentage": 100.0,
+      "fold_name": "train_through_2023_test_2024",
+      "full_test_lr52": {
+        "brier_score": 0.5948841337767327,
+        "ece": 0.01905105936931245,
+        "log_loss": 0.9965512557111739,
+        "n_samples": 3228
+      },
+      "market": {
+        "brier_score": 0.5775230795781823,
+        "ece": 0.02035637000326403,
+        "log_loss": 0.9702627817370022,
+        "n_samples": 3228
+      },
+      "market_advantage_log_loss": 0.026288473974171667,
+      "role": "development",
+      "test_date_range": [
+        "2024-07-26",
+        "2025-05-25"
+      ],
+      "test_year": 2024,
+      "training_prior": {
+        "brier_score": 0.6509912195571632,
+        "ece": 0.001110798823724335,
+        "log_loss": 1.0757638761276276,
+        "n_samples": 3228
+      },
+      "unaligned_rows": 0,
+      "uniform": {
+        "brier_score": 0.6666666666666669,
+        "ece": 0.09944237918215615,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3228
+      }
+    },
+    {
+      "aligned_lr52": {
+        "brier_score": 0.6025104774179937,
+        "ece": 0.023997950842338828,
+        "log_loss": 1.0065031448028119,
+        "n_samples": 3226
+      },
+      "aligned_rows": 3226,
+      "candidate_test_rows": 3226,
+      "coverage_percentage": 100.0,
+      "fold_name": "train_through_2024_test_2025",
+      "full_test_lr52": {
+        "brier_score": 0.6025104774179937,
+        "ece": 0.023997950842338828,
+        "log_loss": 1.0065031448028119,
+        "n_samples": 3226
+      },
+      "market": {
+        "brier_score": 0.5876376050155128,
+        "ece": 0.018355440140584604,
+        "log_loss": 0.9847704237549025,
+        "n_samples": 3226
+      },
+      "market_advantage_log_loss": 0.021732721047909354,
+      "role": "historical_final",
+      "test_date_range": [
+        "2025-07-25",
+        "2026-05-24"
+      ],
+      "test_year": 2025,
+      "training_prior": {
+        "brier_score": 0.6511827422919783,
+        "ece": 0.001285661089409973,
+        "log_loss": 1.0758889787253365,
+        "n_samples": 3226
+      },
+      "unaligned_rows": 0,
+      "uniform": {
+        "brier_score": 0.6666666666666667,
+        "ece": 0.0972308328166977,
+        "log_loss": 1.0986122886681096,
+        "n_samples": 3226
+      }
+    }
+  ],
+  "generated_at_utc": "2026-07-30T14:35:41Z",
+  "historical_final": {
+    "aligned_lr52": {
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828,
+      "log_loss": 1.0065031448028119,
+      "n_samples": 3226
+    },
+    "aligned_rows": 3226,
+    "candidate_test_rows": 3226,
+    "coverage_percentage": 100.0,
+    "fold_count": 1,
+    "full_test_lr52": {
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828,
+      "log_loss": 1.0065031448028119,
+      "n_samples": 3226
+    },
+    "market": {
+      "brier_score": 0.5876376050155128,
+      "ece": 0.018355440140584604,
+      "log_loss": 0.9847704237549025,
+      "n_samples": 3226
+    },
+    "market_advantage_log_loss": 0.021732721047909354,
+    "name": "historical_final",
+    "training_prior": {
+      "brier_score": 0.6511827422919783,
+      "ece": 0.001285661089409973,
+      "log_loss": 1.0758889787253365,
+      "n_samples": 3226
+    },
+    "uniform": {
+      "brier_score": 0.6666666666666667,
+      "ece": 0.09723083281669771,
+      "log_loss": 1.0986122886681096,
+      "n_samples": 3226
+    }
+  },
+  "limitations": [
+    "Closing prices are a near-kickoff late-information benchmark and do not share LR52's earlier information timing.",
+    "The local historical match and odds archives are read-only and are not redistributed.",
+    "The authoritative result contains fold and aggregate metrics but no match-level probability arrays.",
+    "The historically frozen final fold has previously been examined and is not currently unseen.",
+    "No claim that LR52 outperforms the closing market is made."
+  ],
+  "market_timing": {
+    "classification": "closing_near_kickoff",
+    "description": "final pre-kickoff closing average 1X2 prices"
+  },
+  "probability_transformation": {
+    "de_vig": "divide each raw implied probability by the row implied sum",
+    "output_order": [
+      "H",
+      "D",
+      "A"
+    ],
+    "overround": "sum of the three raw implied probabilities; retained as diagnostic metadata",
+    "raw_implied": "one divided by each decimal odd"
+  },
+  "protocol": {
+    "aggregation": "test-sample-count-weighted",
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "market_role": "external untrained benchmark",
+    "split": "expanding SeasonStartYear with strict train dates before test dates",
+    "test_alignment": "exact one-to-one natural-key intersection"
+  },
+  "reference_comparison": {
+    "absolute_differences": {
+      "development_weighted": {
+        "brier_score": 0.0,
+        "ece": 3.469446951953614e-18,
+        "log_loss": 2.220446049250313e-16
+      },
+      "folds": {
+        "2022": {
+          "brier_score": 0.0,
+          "ece": 0.0,
+          "log_loss": 0.0
+        },
+        "2023": {
+          "brier_score": 0.0,
+          "ece": 0.0,
+          "log_loss": 0.0
+        },
+        "2024": {
+          "brier_score": 0.0,
+          "ece": 0.0,
+          "log_loss": 0.0
+        },
+        "2025": {
+          "brier_score": 0.0,
+          "ece": 0.0,
+          "log_loss": 0.0
+        }
+      }
+    },
+    "authoritative_reference": "FBAI_NEW/results/odds_movement_eval.json",
+    "comparison_tolerances": {
+      "brier_score": 1e-12,
+      "ece": 1e-12,
+      "log_loss": 1e-12
+    },
+    "match_level_probability_parity": "unavailable",
+    "match_level_probability_parity_limitation": "The committed authority stores fold and aggregate metrics, not natural-key probability rows.",
+    "public_source_rows": 22617,
+    "reference_preparation_rows": 22616,
+    "reference_scope_note": "The authority required twelve early/closing Avg/Max fields and excluded one pre-evaluation-history row; every 2022-2025 test row is present in both protocols.",
+    "reference_values": {
+      "development": {
+        "brier_score": 0.5745910875645648,
+        "ece": 0.02264946988587521,
+        "log_loss": 0.9663318418439925,
+        "n_samples": 9752
+      },
+      "historical_final": {
+        "brier_score": 0.5876376050155128,
+        "ece": 0.018355440140584604,
+        "log_loss": 0.9847704237549025,
+        "n_samples": 3226
+      }
+    },
+    "verdict": "pass"
+  },
+  "schema_version": "1.0",
+  "source_odds_columns": [
+    "AvgCH",
+    "AvgCD",
+    "AvgCA"
+  ],
+  "status": "reproduced"
+}

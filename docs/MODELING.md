@@ -101,3 +101,16 @@ aggregate metadata is committed under `research/lr52_baseline/`.
 Raw historical rows, team-level output, match predictions, and model binaries
 are not included. The historical archive is not available to CI, which uses
 deterministic synthetic data. No market-comparison claim is made in Phase 3.
+
+## Phase 4 market boundary
+
+Phase 4 does not alter LR52's configuration, preprocessing, targets, or
+52-column input tuple. The model fit path has no market opt-in: raw odds,
+canonical closing odds, market probabilities, and arbitrary extra columns
+remain rejected by the closed selector and semantic guard.
+
+Closing probabilities are constructed and evaluated through a separate
+evaluation-only path. LR52 is fitted first on complete training history;
+same-match comparison restricts only test metrics to exact
+market-covered keys. See [Closing market benchmark](MARKET_BENCHMARK.md) for
+the source triplet, timing, transformation, validation, and coverage contract.

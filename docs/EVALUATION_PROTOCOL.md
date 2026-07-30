@@ -73,3 +73,37 @@ Fold records remain separated by role:
 
 The all-fold view is explicitly diagnostic because the historical final fold
 has previously been examined.
+
+## Closing-market comparison
+
+The closing market is an external, untrained, near-kickoff benchmark. Its
+timing is later than the historical information represented by LR52, so the
+comparison is not described as equal-timing or days-ahead forecasting.
+
+Closing rows attach only through an exact one-to-one match on:
+
+```text
+MatchDate, Division, HomeTeam, AwayTeam
+```
+
+Coverage reports candidate, supplied, valid, duplicate, incomplete, invalid,
+unmatched-both-directions, and final aligned rows, plus percentages overall,
+by division, by `SeasonStartYear`, and by fold. There is no fuzzy name match,
+row-position join, duplicate selection, forward fill, or odds repair.
+
+Within each fold, LR52 still fits on the complete valid training history using
+exactly 52 non-market fields. Both LR52 and market are then evaluated against
+the same targets on the market-covered test-key intersection. Uniform and
+training-prior references use that same intersection. The original full-test
+LR52 metric remains a distinct context value.
+
+Aligned folds are sample-count weighted into development, historical-final,
+and all-historical diagnostic views. The sign convention is:
+
+```text
+market_advantage_log_loss =
+    lr52_aligned_log_loss - market_log_loss
+```
+
+Positive means the market has lower Log Loss; negative means LR52 has lower
+Log Loss; zero is a tie.

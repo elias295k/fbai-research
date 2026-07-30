@@ -30,6 +30,8 @@ mypy src/fbai/core src/fbai/data src/fbai/features src/fbai/models src/fbai/eval
 - The approved model tuple contains exactly 52 ordered `_pre` columns.
 - Every chronological fold fits a new imputer, scaler, and LR52 classifier.
 - Public probabilities are explicitly ordered H, D, A.
+- Synthetic closing odds remain a separate table keyed to invented matches.
+- Market normalization, de-vigging, and alignment are deterministic.
 
 Two invocations of `make_synthetic_fixtures` with the same arguments are
 required to be frame-identical. Different seeds are required to change the
@@ -79,6 +81,27 @@ CI uses only invented data and never requires the historical archive.
 No generated feature files remain after tests because every write uses pytest
 or operating-system temporary directories.
 
+## Phase 4 synthetic market path
+
+```python
+from fbai.evaluation import evaluate_lr52_vs_closing_market
+from fbai.features import build_feature_table
+from fbai.testing import make_synthetic_canonical_matches, make_synthetic_closing_market
+
+matches = make_synthetic_canonical_matches(seed=42)
+features = build_feature_table(matches)
+market = make_synthetic_closing_market(features, seed=43)
+report = evaluate_lr52_vs_closing_market(features, market)
+
+assert report.feature_count == 52
+assert report.development.aligned_lr52.n_samples == report.development.market.n_samples
+```
+
+Negative synthetic modes deterministically remove rows, omit an odds
+component, duplicate a key, insert an invalid odd, or shuffle rows. This
+exercises coverage and failure behavior without real provider data, network
+access, secrets, or live prices.
+
 ## Offline historical record
 
 The committed LR52 research record was produced locally by reading an
@@ -89,6 +112,18 @@ metrics, baseline aggregates, and reference differences were retained.
 
 Historical rows and match-level predictions are not committed and are not
 needed by CI. The public API example above contains no private path.
+
+The closing-market reproduction separately reads the authorized FBAI_NEW
+closing-average columns, normalizes them through the public market code, and
+aligns them to rebuilt feature rows by exact natural key. It compares
+fold-level Log Loss, Brier score, and ECE with the strongest direct committed
+market result. The odds file is not copied because the public code licence
+does not grant redistribution rights over third-party data.
+
+`research/closing_market_benchmark/result.json` is independently inspectable:
+it records the schema, transformation, timing, coverage, same-match metrics,
+reference values, absolute differences, tolerances, and verdict. It contains
+no raw prices, team rows, match-level predictions, or machine paths.
 
 ## Reproducibility levels
 
@@ -101,6 +136,7 @@ needed by CI. The public API example above contains no private path.
   snapshot cannot be redistributed.
 
 The synthetic L0 path now covers canonical loading, feature engineering,
-train-only LR52 fitting, H/D/A prediction, and chronological reporting. The
-aggregate research record documents a separate offline historical
-reproduction; it is not required for public test execution.
+train-only LR52 fitting, separate market validation/de-vigging, exact-key
+alignment, H/D/A evaluation, and chronological reporting. Aggregate research
+records document separate offline historical reproductions; they are not
+required for public test execution.

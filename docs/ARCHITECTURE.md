@@ -2,7 +2,8 @@
 
 The package now has a canonical historical-match layer and a closed,
 leakage-safe pre-match feature layer alongside the Phase 1 evaluation
-contracts and the Phase 3 probabilistic baseline.
+contracts, the Phase 3 probabilistic baseline, and a separate Phase 4
+closing-market benchmark.
 
 ```text
 src/fbai/
@@ -49,6 +50,15 @@ synthetic/source CSV
     -> train-only median imputation and scaling
     -> LR52
     -> chronological evaluation report
+
+separate closing-odds table
+    -> strict market validation
+    -> reciprocal implied probabilities
+    -> row-sum overround removal
+
+LR52 probabilities + market probabilities
+    -> exact natural-key intersection
+    -> aligned chronological comparison report
 ```
 
 The canonical schema contains match identity, full-time result and goals, and
@@ -115,3 +125,23 @@ scikit-learn's class order to named H/D/A columns.
 new pipeline and training-prior baseline per fold, validates probabilities,
 and produces immutable aggregate-only records. No fitted model or match-level
 prediction is written to disk.
+
+## Market boundary
+
+`evaluation.market` defines a provider-neutral seven-column closing-market
+table. Historical `AvgCH/AvgCD/AvgCA` aliases normalize into
+`ClosingHomeOdds/ClosingDrawOdds/ClosingAwayOdds`. Decimal prices must be
+finite and greater than one. Reciprocal implied probabilities are normalized
+by their finite positive row sum in explicit H/D/A order; the unnormalized
+sum remains a diagnostic.
+
+`evaluation.comparison` never adds these fields to the canonical or feature
+tables. It validates both natural-key sides, reports coverage, and uses a
+one-to-one exact-key intersection. LR52 fits on the full valid training
+history and predicts the full fold before test evaluation is restricted to
+the identical market-covered matches. Full-test LR52 remains separate from
+aligned LR52 in immutable aggregate-only records.
+
+`testing.market` creates a separate deterministic invented market table,
+including controlled missing, incomplete, duplicate, invalid, and shuffled
+modes. It never changes the canonical synthetic-match API.
