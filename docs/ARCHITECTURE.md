@@ -189,3 +189,15 @@ pipeline. All matches on the target date are excluded together. The
 candidate's imputer, scaler, and classifier fit only on outer training rows;
 LR52 is independently refitted on identical covered-division keys. Neither
 the external table nor the 16-name contract is accepted by stable LR52.
+
+`research.deep_capacity` is a fourth isolated branch and reuses the optional
+CPU Torch extra. It accepts only the exact stable 52-feature table. Two fixed
+fully connected architectures fit from scratch in each development fold;
+inner-fit-only imputation/scaling and complete-date validation boundaries
+precede deterministic Adam training.
+
+Architecture selection is development-only. The historical-final fold trains
+only the selected architecture. The evaluator emits aggregate records and
+never writes learned state. Importing or fitting stable LR52 does not import
+Torch, and the capacity branch does not alter `FEATURE_COLUMNS`,
+`LR52Config`, or any prior evaluator.

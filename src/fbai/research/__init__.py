@@ -7,6 +7,12 @@ from fbai.research.common import (
     ResearchGate,
     ResearchGateResult,
 )
+from fbai.research.deep_capacity import (
+    AUTHORITATIVE_CONFIGS,
+    DeepCapacityComparisonReport,
+    DeepCapacityConfig,
+    evaluate_deep_capacity,
+)
 from fbai.research.pseudo_xg import (
     PSEUDO_XG_FEATURE_COLUMNS,
     PseudoXGComparisonReport,
@@ -25,6 +31,9 @@ __all__ = [
     "CandidateAggregate",
     "CandidateComparisonReport",
     "CandidateFoldEvaluation",
+    "AUTHORITATIVE_CONFIGS",
+    "DeepCapacityComparisonReport",
+    "DeepCapacityConfig",
     "PSEUDO_XG_FEATURE_COLUMNS",
     "PseudoXGComparisonReport",
     "PseudoXGConfig",
@@ -34,6 +43,7 @@ __all__ = [
     "UnderstatXGComparisonReport",
     "UnderstatXGConfig",
     "align_understat_xg",
+    "evaluate_deep_capacity",
     "evaluate_understat_xg_candidate",
     "evaluate_pseudo_xg_candidate",
 ]

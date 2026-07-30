@@ -56,3 +56,15 @@ The historical artifact aligns 8,953 rows across five divisions and passes
 all source quality gates, but ends after the 2023 season start. The candidate
 is worse on weighted development Log Loss and retains the source disposition
 `XG_SIGNAL_REJECTED_FOR_NOW`. No external rows are committed or needed by CI.
+
+## Phase 5C1: controlled deep capacity
+
+Phase 5C1 holds the stable input constant and ports the source’s two internal
+Torch MLPs. The public evaluator strengthens chronological early stopping by
+keeping dates indivisible, selects capacity only on development folds, and
+evaluates 2025 once for the selected architecture.
+
+That adaptation changes the selected network but not the conclusion:
+development improvement is far below `0.005`, the final fold is not
+confirmatory, and `DATA_CEILING_UPHELD` remains. Torch stays optional, LR52
+stays default, and no prior research record changes.

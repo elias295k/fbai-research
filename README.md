@@ -117,6 +117,12 @@ optional external research input
     -> 16 strictly-prior, within-season xG features
     -> LR52 + external-xG candidate
     -> identical-row LR52 comparison and predefined gate
+
+exact stable 52-feature input
+    -> train-only preprocessing
+    -> fixed shallow/deep CPU MLP capacity audit
+    -> development-only architecture selection
+    -> identical-row LR52 comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -135,6 +141,7 @@ See:
 - [Match2Vec research candidate](docs/MATCH2VEC.md)
 - [Pseudo-xG research experiment](docs/PSEUDO_XG.md)
 - [Understat xG research experiment](docs/UNDERSTAT_XG.md)
+- [Deep-capacity research experiment](docs/DEEP_CAPACITY.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

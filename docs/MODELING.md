@@ -158,3 +158,16 @@ scaler, and L2 `lbfgs` Logistic Regression with `C=1`, `max_iter=2000`, and
 `random_state=42`. LR52 is fitted independently on identical
 covered-division rows. The experiment failed its development gate and remains
 optional research. See [Understat xG](UNDERSTAT_XG.md).
+
+## Phase 5C1 deep-capacity boundary
+
+The capacity audit keeps the input fixed and varies only a bounded neural
+classifier. Its two source architectures are `52→64→3` with 0.10 dropout and
+`52→128→64→3` with 0.20 dropout. Hidden layers use ReLU and no normalization.
+Both use deterministic CPU Adam with the frozen source settings.
+
+Median imputation and standard scaling fit on chronological inner-fit rows.
+Complete dates remain indivisible during early stopping. Development folds
+select the architecture; 2025 is evaluated only once for that selection.
+Neither network wraps or changes LR52, and neither is part of the default
+model path. See [Deep capacity](DEEP_CAPACITY.md).

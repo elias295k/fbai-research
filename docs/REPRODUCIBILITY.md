@@ -201,3 +201,19 @@ retain a generated table, or write into either source repository. The
 aggregate-only record reports artifact checksum, schema and coverage counts,
 fold metrics, gate values, and reference differences. It contains no raw
 rows, match predictions, fitted objects, or machine paths.
+
+## Phase 5C1 synthetic and historical deep-capacity paths
+
+Synthetic tests exercise the exact architecture grid and parameter counts,
+CPU same-seed determinism, H/D/A normalization, fresh fold-local training,
+inner-fit preprocessing, complete-date validation boundaries, keyed shuffle
+equivalence, development-only selection, final-fold isolation, weighted
+aggregation, the exact gate, stable feature fingerprint, and preservation of
+prior research records.
+
+The historical reproduction reads the authorized local 52-feature archive
+in place and retains the authority’s published 22,616-row comparison scope.
+Only the 52 internal fields enter either model. The public inner split keeps
+dates whole, unlike the source row-count split; selection and numerical
+differences are recorded explicitly. No learned state, tensors, predictions,
+or generated dataset is retained.

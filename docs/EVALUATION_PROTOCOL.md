@@ -187,3 +187,29 @@ required:
 
 The 2025 historical-final result cannot tune or rescue the candidate. See
 [Understat xG](UNDERSTAT_XG.md).
+
+## Deep-capacity candidate protocol
+
+The capacity audit uses only the exact 52 stable features. Both fixed MLP
+architectures run independently on the 2022–2024 development folds. Each
+outer training window is divided by `inner_time_split`, so validation contains
+the chronologically latest ten percent of distinct dates and no date crosses
+the fit/validation boundary. Preprocessing and Adam state fit only on
+inner-fit rows.
+
+Development weighted Log Loss selects one architecture. Only that architecture
+is evaluated on 2025. LR52 is independently fitted on complete outer training
+rows and evaluated on identical test keys.
+
+```text
+candidate_improvement_log_loss =
+    lr52_log_loss - selected_mlp_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+The source row-count split could divide dates; the public complete-date
+adaptation is recorded with its numerical effect. See
+[Deep capacity](DEEP_CAPACITY.md).

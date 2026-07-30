@@ -1,0 +1,388 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "deep_capacity_lr52_historical_reproduction",
+  "status": "reproduced",
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "input_feature_count": 52,
+  "source_authority": {
+    "executable_model": "deep.py",
+    "executable_audit": "run_deep_model_audit.py",
+    "tests": "test_deep_audit.py",
+    "structured_result": "deep_model_audit.json",
+    "report": "DEEP_MODEL_AUDIT.md"
+  },
+  "protocol": {
+    "historical_rows": 22616,
+    "input_feature_count": 52,
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "outer_split": "expanding SeasonStartYear with strict train dates before test dates",
+    "inner_split": "chronologically final 10 percent of dates with complete dates indivisible",
+    "preprocessing": "median imputation then standard scaling fitted on inner-fit rows only",
+    "architecture_selection": "minimum development sample-count-weighted log loss",
+    "historical_final_policy": "selected architecture evaluated once",
+    "aggregation": "test-sample-count-weighted"
+  },
+  "architectures": [
+    {
+      "name": "h64_do10_wd1e3",
+      "hidden_dimensions": [
+        64
+      ],
+      "activation": "ReLU",
+      "dropout": 0.1,
+      "normalization_layers": [],
+      "parameter_count": 3587,
+      "optimizer": "Adam",
+      "learning_rate": 0.003,
+      "weight_decay": 0.001,
+      "batch_size": 512,
+      "maximum_epochs": 220,
+      "patience": 18,
+      "minimum_delta": 0.00001,
+      "seed": 42,
+      "device": "cpu"
+    },
+    {
+      "name": "h128_64_do20_wd1e3",
+      "hidden_dimensions": [
+        128,
+        64
+      ],
+      "activation": "ReLU",
+      "dropout": 0.2,
+      "normalization_layers": [],
+      "parameter_count": 15235,
+      "optimizer": "Adam",
+      "learning_rate": 0.003,
+      "weight_decay": 0.001,
+      "batch_size": 512,
+      "maximum_epochs": 220,
+      "patience": 18,
+      "minimum_delta": 0.00001,
+      "seed": 42,
+      "device": "cpu"
+    }
+  ],
+  "baseline_lr52": {
+    "development_folds": {
+      "2022": {
+        "n_samples": 3296,
+        "log_loss": 0.9963133367889545,
+        "brier_score": 0.593691974310014,
+        "ece": 0.011980137370536355
+      },
+      "2023": {
+        "n_samples": 3228,
+        "log_loss": 0.9820461720771774,
+        "brier_score": 0.5846811182676304,
+        "ece": 0.01560868113999946
+      },
+      "2024": {
+        "n_samples": 3228,
+        "log_loss": 0.9965390442734793,
+        "brier_score": 0.5948765288994915,
+        "ece": 0.020968997640354026
+      }
+    },
+    "development": {
+      "n_samples": 9752,
+      "log_loss": 0.9916654877395729,
+      "brier_score": 0.5911013979062013,
+      "ece": 0.016156611964342583
+    },
+    "historical_final": {
+      "n_samples": 3226,
+      "log_loss": 1.0065220651499802,
+      "brier_score": 0.6025231860002008,
+      "ece": 0.023797602831916207
+    },
+    "all_historical_diagnostic": {
+      "n_samples": 12978,
+      "log_loss": 0.9953584542001965,
+      "brier_score": 0.5939405632931055,
+      "ece": 0.018055967530592583
+    }
+  },
+  "development_candidates": [
+    {
+      "architecture": "h64_do10_wd1e3",
+      "parameter_count": 3587,
+      "folds": [
+        {
+          "test_year": 2022,
+          "role": "development",
+          "train_rows": 9638,
+          "fit_rows": 8614,
+          "validation_rows": 1024,
+          "test_rows": 3296,
+          "training_epochs": 23,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3296,
+            "log_loss": 0.994711443639139,
+            "brier_score": 0.5927344787326889,
+            "ece": 0.01729643131749311
+          },
+          "candidate_improvement_log_loss": 0.0016018931498155142
+        },
+        {
+          "test_year": 2023,
+          "role": "development",
+          "train_rows": 12934,
+          "fit_rows": 11482,
+          "validation_rows": 1452,
+          "test_rows": 3228,
+          "training_epochs": 21,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3228,
+            "log_loss": 0.9836559558424722,
+            "brier_score": 0.5854963873513732,
+            "ece": 0.015060782991689697
+          },
+          "candidate_improvement_log_loss": -0.0016097837652948588
+        },
+        {
+          "test_year": 2024,
+          "role": "development",
+          "train_rows": 16162,
+          "fit_rows": 14552,
+          "validation_rows": 1610,
+          "test_rows": 3228,
+          "training_epochs": 20,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3228,
+            "log_loss": 0.9975368718501136,
+            "brier_score": 0.5956894430445276,
+            "ece": 0.012774342538673954
+          },
+          "candidate_improvement_log_loss": -0.000997827576634358
+        }
+      ],
+      "development": {
+        "n_samples": 9752,
+        "log_loss": 0.9919872196499457,
+        "brier_score": 0.5913167250226529,
+        "ece": 0.015059559355462587,
+        "candidate_improvement_log_loss": -0.00032173191037287996,
+        "improving_fold_count": 1
+      }
+    },
+    {
+      "architecture": "h128_64_do20_wd1e3",
+      "parameter_count": 15235,
+      "folds": [
+        {
+          "test_year": 2022,
+          "role": "development",
+          "train_rows": 9638,
+          "fit_rows": 8614,
+          "validation_rows": 1024,
+          "test_rows": 3296,
+          "training_epochs": 23,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3296,
+            "log_loss": 0.996093567594761,
+            "brier_score": 0.59376910762903,
+            "ece": 0.021084936752133975
+          },
+          "candidate_improvement_log_loss": 0.00021976919419353091
+        },
+        {
+          "test_year": 2023,
+          "role": "development",
+          "train_rows": 12934,
+          "fit_rows": 11482,
+          "validation_rows": 1452,
+          "test_rows": 3228,
+          "training_epochs": 23,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3228,
+            "log_loss": 0.9813048322478866,
+            "brier_score": 0.5839850788588642,
+            "ece": 0.018399053508198576
+          },
+          "candidate_improvement_log_loss": 0.0007413398292908102
+        },
+        {
+          "test_year": 2024,
+          "role": "development",
+          "train_rows": 16162,
+          "fit_rows": 14552,
+          "validation_rows": 1610,
+          "test_rows": 3228,
+          "training_epochs": 22,
+          "same_date_isolation": true,
+          "candidate": {
+            "n_samples": 3228,
+            "log_loss": 0.9970089539152471,
+            "brier_score": 0.5959683599896933,
+            "ece": 0.007570314876121471
+          },
+          "candidate_improvement_log_loss": -0.00046990964176785166
+        }
+      ],
+      "development": {
+        "n_samples": 9752,
+        "log_loss": 0.9915013638768383,
+        "brier_score": 0.5912584781940552,
+        "ece": 0.015722423367475258,
+        "candidate_improvement_log_loss": 0.00016412386273456647,
+        "improving_fold_count": 2
+      }
+    }
+  ],
+  "selection": {
+    "metric": "development_sample_count_weighted_log_loss",
+    "development_only": true,
+    "source_selected_architecture": "h64_do10_wd1e3",
+    "safety_adapted_selected_architecture": "h128_64_do20_wd1e3",
+    "selection_changed_by_same_date_adaptation": true
+  },
+  "historical_final": {
+    "architecture": "h128_64_do20_wd1e3",
+    "parameter_count": 15235,
+    "test_year": 2025,
+    "role": "historical_final",
+    "train_rows": 19390,
+    "fit_rows": 17468,
+    "validation_rows": 1922,
+    "test_rows": 3226,
+    "training_epochs": 25,
+    "same_date_isolation": true,
+    "lr52": {
+      "n_samples": 3226,
+      "log_loss": 1.0065220651499802,
+      "brier_score": 0.6025231860002008,
+      "ece": 0.023797602831916207
+    },
+    "candidate": {
+      "n_samples": 3226,
+      "log_loss": 1.0066342255966132,
+      "brier_score": 0.6019877402520585,
+      "ece": 0.019225184638527675
+    },
+    "candidate_improvement_log_loss": -0.00011216044663298064
+  },
+  "all_historical_diagnostic": {
+    "architecture": "h128_64_do20_wd1e3",
+    "fold_count": 4,
+    "lr52": {
+      "n_samples": 12978,
+      "log_loss": 0.9953584542001965,
+      "brier_score": 0.5939405632931055,
+      "ece": 0.018055967530592583
+    },
+    "candidate": {
+      "n_samples": 12978,
+      "log_loss": 0.99526300757448,
+      "brier_score": 0.5939254992604074,
+      "ece": 0.016593120536562565
+    },
+    "candidate_improvement_log_loss": 0.00009544662571647766
+  },
+  "success_gate": {
+    "definition": {
+      "primary_metric": "development_sample_count_weighted_log_loss",
+      "improvement_sign_convention": "lr52_log_loss_minus_candidate_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "development_fold_count": 3
+    },
+    "observed": {
+      "candidate_improvement_log_loss": 0.00016412386273456647,
+      "improving_fold_count": 2,
+      "historical_final_improvement_log_loss": -0.00011216044663298064
+    },
+    "passed": false,
+    "disposition": "DATA_CEILING_UPHELD"
+  },
+  "reference_comparison": {
+    "authoritative_reference": "deep_model_audit.json internal MLP family",
+    "safety_adaptation": "inner validation keeps complete dates indivisible and input uses stable natural-key ordering",
+    "comparison_tolerances": {
+      "log_loss": 0.006,
+      "brier_score": 0.004,
+      "ece": 0.011
+    },
+    "reference_selection": {
+      "architecture": "h64_do10_wd1e3",
+      "development_log_loss": 0.9904494983823305,
+      "development_improvement_log_loss": 0.0012159893572422087,
+      "improving_fold_count": 3,
+      "historical_final_log_loss": 1.0095412731170654
+    },
+    "absolute_differences": {
+      "h64_do10_wd1e3": {
+        "development_folds": {
+          "2022": {
+            "log_loss": 0.00017328574623698412,
+            "brier_score": 0.000009285396060265683,
+            "ece": 0.0010445273860003879
+          },
+          "2023": {
+            "log_loss": 0.001806523850895081,
+            "brier_score": 0.0012213666357403508,
+            "ece": 0.002116297556917595
+          },
+          "2024": {
+            "log_loss": 0.0030159692164466456,
+            "brier_score": 0.0014772050105710255,
+            "ece": 0.008465510185643621
+          }
+        },
+        "development": {
+          "log_loss": 0.0015377212676151997,
+          "brier_score": 0.0008901132699834502,
+          "ece": 0.003149642445521978
+        }
+      },
+      "h128_64_do20_wd1e3": {
+        "development_folds": {
+          "2022": {
+            "log_loss": 0.005264703050380626,
+            "brier_score": 0.0030885064644136095,
+            "ece": 0.007891525758036314
+          },
+          "2023": {
+            "log_loss": 0.002371199874076746,
+            "brier_score": 0.0015062859486723035,
+            "ece": 0.010238195555907525
+          },
+          "2024": {
+            "log_loss": 0.00019655071319024664,
+            "brier_score": 0.0006369675088737647,
+            "ece": 0.004585040956416876
+          }
+        },
+        "development": {
+          "log_loss": 0.0009294260006518229,
+          "brier_score": 0.00033442321018750665,
+          "ece": 0.0007959480979626565
+        }
+      }
+    },
+    "reproduction_passed": true,
+    "verdict": "pass_with_same_date_protocol_adaptation"
+  },
+  "verdict": "failed_gate",
+  "disposition": "DATA_CEILING_UPHELD",
+  "limitations": [
+    "The authority row scope was retained for comparability, but only the exact 52 internal features enter either network.",
+    "Keeping validation dates indivisible changes the development-selected architecture.",
+    "The historical-final fold has previously been examined and cannot be treated as newly unseen.",
+    "No learned state or match-level output is retained."
+  ]
+}
