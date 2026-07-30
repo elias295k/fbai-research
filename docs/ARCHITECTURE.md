@@ -1,9 +1,18 @@
 # Architecture
 
-The Phase 0–1 package has three focused areas.
+The package now has a canonical historical-match layer alongside the Phase 1
+evaluation contracts.
 
 ```text
 src/fbai/
+├── data/
+│   ├── sources.py   supported public source coordinates
+│   ├── acquire.py   credential-free atomic CSV acquisition
+│   ├── loader.py    source aliases, dates, and season normalization
+│   ├── schema.py    canonical schema and integrity contract
+│   ├── canonical.py validated per-division Parquet output
+│   ├── audit.py     structured dataset audit verdict
+│   └── store.py     in-memory DuckDB access
 ├── core/
 │   ├── leakage.py   semantic column roles and table contracts
 │   ├── splits.py    chronological folds, inner splits, date batches
@@ -11,6 +20,25 @@ src/fbai/
 └── testing/
     └── synthetic.py deterministic invented fixtures
 ```
+
+## Canonical data path
+
+```text
+synthetic/source CSV
+    -> loader
+    -> canonical validator
+    -> per-division Parquet partitions
+    -> DuckDB query layer
+```
+
+The canonical schema contains match identity, full-time result and goals, and
+the same-match counts needed by the future rolling-feature builder. Bookmaker
+odds, database identifiers, operational metadata, and provider-specific extra
+columns are excluded.
+
+Parquet destinations are explicit caller inputs. Files are written through
+temporary paths, read back for equality, and only then atomically installed.
+DuckDB uses an in-memory connection and unions discovered partitions by name.
 
 ## Leakage boundary
 

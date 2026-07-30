@@ -1,17 +1,20 @@
-# FBAI — Football Outcome Intelligence
+# FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-outcome research. The current Phase 0–1 release focuses on correctness
-contracts rather than model breadth:
+research. Phase 2A adds a deterministic historical-match data contract:
 
+- source-shaped CSV normalization into one canonical schema;
+- strict match and natural-key integrity validation;
+- atomic, per-division Parquet partitions with read-back verification;
+- an in-memory DuckDB query layer over those partitions;
 - semantic model-input and feature-table validation;
 - deterministic chronological folds and same-date match batching;
 - H/D/A-order-safe probabilistic metrics;
-- deterministic, wholly synthetic football fixtures;
+- deterministic, wholly synthetic raw and canonical matches;
 - tests and CI for those guarantees.
 
-No real football dataset, betting system, live API, database, dashboard, or
-research model is included.
+No third-party football data is committed. Phase 2A does not build the
+52-feature table and does not train a model.
 
 ## Install
 
@@ -22,7 +25,7 @@ python -m pip install -e ".[dev]"
 pytest
 ruff check .
 ruff format --check .
-mypy src/fbai/core
+mypy src/fbai/core src/fbai/data
 ```
 
 ## Small example

@@ -24,11 +24,16 @@ dist/
 Thumbs.db
 
 # Third-party or generated data must remain local
-data/
+/data/
+/data/raw/
+/data/canonical/
+/data/features/
+/data/external/
+/data/downloads/
 *.csv
 *.parquet
 *.feather
+*.duckdb
 *.db
 *.sqlite
 *.sqlite3
-

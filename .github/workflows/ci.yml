@@ -27,7 +27,7 @@ jobs:
         run: ruff check .
       - name: Ruff format
         run: ruff format --check .
-      - name: Mypy core
-        run: mypy src/fbai/core
+      - name: Mypy core and data
+        run: mypy src/fbai/core src/fbai/data
       - name: Tests
         run: pytest
