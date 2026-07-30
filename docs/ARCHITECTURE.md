@@ -169,3 +169,11 @@ closed contract and is never accepted by `fit_lr52`.
 The source-selected candidate concatenates that representation with the exact
 52 LR52 numeric values inside its own linear H/D/A head. It does not alter
 `FEATURE_COLUMNS`, `LR52Config`, the LR52 evaluator, or the market evaluator.
+
+`research.pseudo_xg` is a second isolated branch using only canonical
+completed-match goals, shots, and shots on target. A Poisson estimator is
+trained without test rows; 12 strict-prior rolling aggregates then feed a
+separate LR64 pipeline. Candidate-training transforms use season-boundary
+walk-forward estimator fits, while each fold's test transform uses the full
+outer training partition. The research selector explicitly approves 52 plus
+12 names, but the stable selector still accepts exactly 52.

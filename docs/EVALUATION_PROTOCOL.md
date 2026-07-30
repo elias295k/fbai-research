@@ -137,3 +137,28 @@ required:
 Positive values favor Match2Vec. The 2025 historical-final result is reported
 but cannot tune the candidate or rescue a failed development gate. See
 [Match2Vec](MATCH2VEC.md).
+
+## Pseudo-xG candidate protocol
+
+Pseudo-xG uses the same four outer folds, public metrics, identical-key LR52
+comparison, sample-count weighting, and development/final separation. The
+Poisson estimator target is goals and its predictors are shots on target and
+shots off target. Candidate-training features use walk-forward estimator
+refits at season boundaries; test features use only the current outer
+training estimator. Every rolling window is restricted to the target season
+and dates strictly before the complete target-date batch.
+
+The candidate is median-imputed, standardized Logistic Regression on 52 plus
+12 explicitly approved research features. Its gate is:
+
+```text
+candidate_improvement_log_loss =
+    lr52_log_loss - pseudo_xg_candidate_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+The historical-final result cannot select configuration or rescue a failed
+development gate. See [Pseudo-xG](PSEUDO_XG.md).

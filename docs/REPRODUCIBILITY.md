@@ -170,3 +170,18 @@ The committed Match2Vec record contains only aggregate/fold metrics,
 configuration, vocabulary sizes, OOV occurrence counts, and reference
 differences. Historical rows, natural keys, team tokens, vocabularies, learned
 representations, model weights, and predictions are not committed.
+
+## Phase 5B1 synthetic and historical pseudo-xG paths
+
+Synthetic tests build invented multi-season, multi-division canonical rows
+and prove the exact estimator configuration, fold-local fitting, train/test
+separation, current/future/same-date exclusion, season and division
+isolation, keyed shuffle invariance, H/D/A ordering, identical LR52 test
+keys, weighted aggregation, stable 52-feature fingerprint, and exact gate.
+
+The historical reproduction reads authorized local canonical partitions,
+selects only the public canonical fields, rebuilds the exact 52 stable
+features, and runs the public pseudo-xG evaluator. It makes no provider
+request and retains no generated data, predictions, parameters, or models.
+`research/pseudo_xg/result.json` contains only aggregate/fold metadata and
+explicit comparisons with the committed authority.

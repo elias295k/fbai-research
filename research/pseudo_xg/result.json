@@ -1,0 +1,408 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "pseudo_xg_lr64_historical_reproduction",
+  "status": "reproduced",
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "source_authority": {
+    "executable_model": "FBAI_NEW/src/fbai_new/xg.py",
+    "executable_evaluation": "FBAI_NEW/scripts/run_xg_eval.py",
+    "tests": "FBAI_NEW/tests/test_xg.py",
+    "structured_result": "FBAI_NEW/results/xg_eval.json",
+    "report": "FBAI_NEW/reports/XG_RESULTS.md"
+  },
+  "protocol": {
+    "historical_row_count": 22617,
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "outer_split": "expanding SeasonStartYear with strict train dates before test dates",
+    "same_date_policy": "all matches on a target date are excluded as one information batch",
+    "history_policy": "strictly earlier date within Division, team, and SeasonStartYear",
+    "training_transform": "season-boundary walk-forward estimator fits using only earlier dates",
+    "test_transform": "one estimator fitted on the complete outer training partition",
+    "aggregation": "test-sample-count-weighted"
+  },
+  "pseudo_xg": {
+    "target": "goals",
+    "predictors": [
+      "shots_on_target",
+      "shots_off_target"
+    ],
+    "shots_off_target_definition": "total_shots_minus_shots_on_target",
+    "formula": "E[goals | shots_on_target, shots_off_target] = exp(intercept + beta_target * shots_on_target + beta_off * shots_off_target)",
+    "estimator": "PoissonRegressor",
+    "estimator_scope": "eligible training dates pooled across divisions",
+    "alpha": 1e-06,
+    "max_iter": 1000,
+    "fit_intercept": true,
+    "solver": "lbfgs",
+    "tolerance": 0.0001,
+    "rolling_windows": [
+      5,
+      10
+    ],
+    "feature_count": 12,
+    "feature_names": [
+      "PxgForAvg5_H_pxg_pre",
+      "PxgAgainstAvg5_H_pxg_pre",
+      "GminusPxgForAvg5_H_pxg_pre",
+      "PxgForAvg10_H_pxg_pre",
+      "PxgAgainstAvg10_H_pxg_pre",
+      "GminusPxgForAvg10_H_pxg_pre",
+      "PxgForAvg5_A_pxg_pre",
+      "PxgAgainstAvg5_A_pxg_pre",
+      "GminusPxgForAvg5_A_pxg_pre",
+      "PxgForAvg10_A_pxg_pre",
+      "PxgAgainstAvg10_A_pxg_pre",
+      "GminusPxgForAvg10_A_pxg_pre"
+    ]
+  },
+  "candidate": {
+    "name": "LR52 + 12 historical pseudo-xG features",
+    "base_feature_count": 52,
+    "total_feature_count": 64,
+    "imputation": "median fitted on candidate training rows",
+    "scaling": "standard fitted on candidate training rows",
+    "classifier": "LogisticRegression",
+    "solver": "lbfgs",
+    "effective_penalty": "l2",
+    "C": 1.0,
+    "max_iter": 2000,
+    "fit_intercept": true,
+    "class_weight": null,
+    "random_state": 42,
+    "tolerance": 0.0001,
+    "output_order": [
+      "H",
+      "D",
+      "A"
+    ]
+  },
+  "folds": [
+    {
+      "fold_name": "train_through_2021_test_2022",
+      "test_year": 2022,
+      "role": "development",
+      "train_date_range": [
+        "2019-07-26",
+        "2022-05-22"
+      ],
+      "test_date_range": [
+        "2022-07-22",
+        "2023-06-04"
+      ],
+      "train_rows": 9639,
+      "test_rows": 3296,
+      "estimator_training_match_rows": 9639,
+      "estimator_training_side_rows": 19271,
+      "estimator_iterations": 14,
+      "candidate_preprocessing_fit_rows": 9639,
+      "candidate_iterations": [
+        88
+      ],
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 3296,
+        "log_loss": 0.9963446047464517,
+        "brier_score": 0.5937116705262461,
+        "ece": 0.012548003925303818
+      },
+      "candidate": {
+        "n_samples": 3296,
+        "log_loss": 0.9965700066230083,
+        "brier_score": 0.5937826337553488,
+        "ece": 0.009123383600033275
+      },
+      "candidate_improvement_log_loss": -0.00022540187655661903
+    },
+    {
+      "fold_name": "train_through_2022_test_2023",
+      "test_year": 2023,
+      "role": "development",
+      "train_date_range": [
+        "2019-07-26",
+        "2023-06-04"
+      ],
+      "test_date_range": [
+        "2023-07-28",
+        "2024-06-02"
+      ],
+      "train_rows": 12935,
+      "test_rows": 3228,
+      "estimator_training_match_rows": 12935,
+      "estimator_training_side_rows": 25859,
+      "estimator_iterations": 13,
+      "candidate_preprocessing_fit_rows": 12935,
+      "candidate_iterations": [
+        87
+      ],
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 3228,
+        "log_loss": 0.9820571914076921,
+        "brier_score": 0.5846906094684491,
+        "ece": 0.01548916415315726
+      },
+      "candidate": {
+        "n_samples": 3228,
+        "log_loss": 0.9826627667417442,
+        "brier_score": 0.5852317757580452,
+        "ece": 0.010992724793004473
+      },
+      "candidate_improvement_log_loss": -0.0006055753340521441
+    },
+    {
+      "fold_name": "train_through_2023_test_2024",
+      "test_year": 2024,
+      "role": "development",
+      "train_date_range": [
+        "2019-07-26",
+        "2024-06-02"
+      ],
+      "test_date_range": [
+        "2024-07-26",
+        "2025-05-25"
+      ],
+      "train_rows": 16163,
+      "test_rows": 3228,
+      "estimator_training_match_rows": 16163,
+      "estimator_training_side_rows": 32315,
+      "estimator_iterations": 14,
+      "candidate_preprocessing_fit_rows": 16163,
+      "candidate_iterations": [
+        94
+      ],
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 3228,
+        "log_loss": 0.9965512557111739,
+        "brier_score": 0.5948841337767327,
+        "ece": 0.01905105936931245
+      },
+      "candidate": {
+        "n_samples": 3228,
+        "log_loss": 0.995597788044259,
+        "brier_score": 0.59438953319957,
+        "ece": 0.019550792944173844
+      },
+      "candidate_improvement_log_loss": 0.0009534676669148423
+    },
+    {
+      "fold_name": "train_through_2024_test_2025",
+      "test_year": 2025,
+      "role": "historical_final",
+      "train_date_range": [
+        "2019-07-26",
+        "2025-05-25"
+      ],
+      "test_date_range": [
+        "2025-07-25",
+        "2026-05-24"
+      ],
+      "train_rows": 19391,
+      "test_rows": 3226,
+      "estimator_training_match_rows": 19391,
+      "estimator_training_side_rows": 38766,
+      "estimator_iterations": 15,
+      "candidate_preprocessing_fit_rows": 19391,
+      "candidate_iterations": [
+        91
+      ],
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 3226,
+        "log_loss": 1.0065031448028119,
+        "brier_score": 0.6025104774179937,
+        "ece": 0.023997950842338828
+      },
+      "candidate": {
+        "n_samples": 3226,
+        "log_loss": 1.0056565684926182,
+        "brier_score": 0.6020946970575569,
+        "ece": 0.021229115136212003
+      },
+      "candidate_improvement_log_loss": 0.0008465763101936918
+    }
+  ],
+  "development": {
+    "name": "development",
+    "fold_count": 3,
+    "lr52": {
+      "n_samples": 9752,
+      "log_loss": 0.9916837453388027,
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024
+    },
+    "candidate": {
+      "n_samples": 9752,
+      "log_loss": 0.9916447716036356,
+      "brier_score": 0.5911531117896649,
+      "ece": 0.013193718991111698
+    },
+    "candidate_improvement_log_loss": 3.897373516703606e-05
+  },
+  "historical_final": {
+    "name": "historical_final",
+    "fold_count": 1,
+    "lr52": {
+      "n_samples": 3226,
+      "log_loss": 1.0065031448028119,
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828
+    },
+    "candidate": {
+      "n_samples": 3226,
+      "log_loss": 1.0056565684926182,
+      "brier_score": 0.6020946970575569,
+      "ece": 0.021229115136212003
+    },
+    "candidate_improvement_log_loss": 0.0008465763101936918
+  },
+  "all_historical_diagnostic": {
+    "name": "all_historical_diagnostic",
+    "fold_count": 4,
+    "lr52": {
+      "n_samples": 12978,
+      "log_loss": 0.9953674703095913,
+      "brier_score": 0.593946658761011,
+      "ece": 0.017743215586817587
+    },
+    "candidate": {
+      "n_samples": 12978,
+      "log_loss": 0.9951277471594884,
+      "brier_score": 0.5938729109940276,
+      "ece": 0.015191113656244506
+    },
+    "candidate_improvement_log_loss": 0.00023972315010289957
+  },
+  "success_gate": {
+    "definition": {
+      "primary_metric": "development_sample_count_weighted_log_loss",
+      "improvement_sign_convention": "lr52_log_loss_minus_candidate_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "development_fold_count": 3
+    },
+    "observed": {
+      "candidate_improvement_log_loss": 3.897373516703606e-05,
+      "improving_fold_count": 1,
+      "historical_final_improvement_log_loss": 0.0008465763101936918
+    },
+    "passed": false,
+    "disposition": "XG_SIGNAL_REJECTED_FOR_NOW"
+  },
+  "reference_comparison": {
+    "authoritative_reference": "FBAI_NEW/results/xg_eval.json primary",
+    "safety_adaptation": "candidate-training pseudo-xG estimators use strictly earlier season-boundary fits",
+    "match_level_probability_parity": "unavailable",
+    "comparison_tolerances": {
+      "log_loss": 0.001,
+      "brier_score": 0.001,
+      "ece": 0.005
+    },
+    "reference_values": {
+      "folds": {
+        "2022": {
+          "n_samples": 3296,
+          "log_loss": 0.9961786183025482,
+          "brier_score": 0.5934691484918161,
+          "ece": 0.013756722596058682
+        },
+        "2023": {
+          "n_samples": 3228,
+          "log_loss": 0.9828944073952979,
+          "brier_score": 0.5853263059698357,
+          "ece": 0.011433579917365832
+        },
+        "2024": {
+          "n_samples": 3228,
+          "log_loss": 0.9952532200958948,
+          "brier_score": 0.5941519153314528,
+          "ece": 0.015468070042294975
+        },
+        "2025": {
+          "n_samples": 3226,
+          "log_loss": 1.0056541796611915,
+          "brier_score": 0.6020906259986463,
+          "ece": 0.019013883471139192
+        }
+      },
+      "development": {
+        "n_samples": 9752,
+        "log_loss": 0.9914751094613174,
+        "brier_score": 0.5909997961228041,
+        "ece": 0.013554212853403868,
+        "candidate_improvement_log_loss": 0.00020863367844636826,
+        "improving_fold_count": 2
+      },
+      "historical_final": {
+        "n_samples": 3226,
+        "log_loss": 1.0056541796611915,
+        "brier_score": 0.6020906259986463,
+        "ece": 0.019013883471139192
+      },
+      "all_historical_diagnostic": {
+        "n_samples": 12978,
+        "log_loss": 0.9949996648985802,
+        "brier_score": 0.5937566937325642,
+        "ece": 0.014911347805847552
+      }
+    },
+    "absolute_differences": {
+      "folds": {
+        "2022": {
+          "log_loss": 0.00039138832046015093,
+          "brier_score": 0.0003134852635326979,
+          "ece": 0.004633338996025407
+        },
+        "2023": {
+          "log_loss": 0.00023164065355363306,
+          "brier_score": 0.00009453021179051113,
+          "ece": 0.00044085512436135843
+        },
+        "2024": {
+          "log_loss": 0.0003445679483642383,
+          "brier_score": 0.00023761786811715702,
+          "ece": 0.004082722901878869
+        },
+        "2025": {
+          "log_loss": 0.0000023888314266695687,
+          "brier_score": 0.000004071058910648517,
+          "ece": 0.002215231665072811
+        }
+      },
+      "development": {
+        "log_loss": 0.00016966214231817212,
+        "brier_score": 0.00015331566686083153,
+        "ece": 0.0003604938622921699
+      },
+      "historical_final": {
+        "log_loss": 0.0000023888314266695687,
+        "brier_score": 0.000004071058910648517,
+        "ece": 0.002215231665072811
+      },
+      "all_historical_diagnostic": {
+        "log_loss": 0.00012808226090821329,
+        "brier_score": 0.00011621726146338052,
+        "ece": 0.00027976585039695377
+      }
+    },
+    "reproduction_passed": true,
+    "verdict": "pass_with_walk_forward_safety_adaptation"
+  },
+  "verdict": "failed_gate",
+  "disposition": "XG_SIGNAL_REJECTED_FOR_NOW",
+  "limitations": [
+    "Pseudo-xG uses match-level shot volume and accuracy rather than positional shot quality.",
+    "The authority does not retain natural-key probability rows for match-level parity.",
+    "The 2025 fold is historical-final and has previously been examined.",
+    "The historical archive and fitted parameters are not redistributed."
+  ]
+}

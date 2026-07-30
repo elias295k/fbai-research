@@ -32,3 +32,15 @@ Canonical ingestion and the verified 52-feature builder may be added after
 the Phase 0–1 contracts are reviewed. Historical experiment records may be
 added later as compact, provenance-tagged evidence. Model families and
 external data adapters are not part of the current scope.
+
+## Phase 5B1: historical pseudo-xG
+
+Later phases added the canonical/feature path, LR52 reproduction, closing
+market benchmark, and isolated Match2Vec experiment. Phase 5B1 now adds the
+authoritative primary pseudo-xG question: a fold-local Poisson estimate of
+completed-match chance quality, 12 strict-prior rolling features, and an
+LR52-plus-12 comparison.
+
+The authority's outer-train transformation ambiguity is tightened with
+season-boundary walk-forward training transforms. LR52, Match2Vec, market
+records, and the stable 52-feature contract remain unchanged.

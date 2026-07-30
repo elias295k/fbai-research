@@ -33,6 +33,8 @@ class ResearchGate:
         candidate_log_loss: float,
         fold_improvements: tuple[float, ...],
         historical_final_improvement_log_loss: float,
+        passing_disposition: str = "MATCH2VEC_CANDIDATE",
+        failing_disposition: str = "MATCH2VEC_REJECTED_FOR_NOW",
     ) -> ResearchGateResult:
         """Evaluate the frozen gate with positive values meaning candidate improvement."""
 
@@ -40,13 +42,15 @@ class ResearchGate:
             raise ValueError(
                 f"Gate requires exactly {self.development_fold_count} development folds"
             )
+        if not passing_disposition or not failing_disposition:
+            raise ValueError("Gate dispositions must be non-empty")
         improvement = lr52_log_loss - candidate_log_loss
         improving_folds = sum(value > 0.0 for value in fold_improvements)
         passed = (
             improvement >= self.minimum_improvement_log_loss
             and improving_folds >= self.minimum_improving_folds
         )
-        disposition = "MATCH2VEC_CANDIDATE" if passed else "MATCH2VEC_REJECTED_FOR_NOW"
+        disposition = passing_disposition if passed else failing_disposition
         return ResearchGateResult(
             definition=self,
             candidate_improvement_log_loss=improvement,

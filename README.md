@@ -1,8 +1,9 @@
 # FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-research. Phase 5A adds an isolated Match2Vec research candidate alongside the
-reproducible LR52 pipeline and separate closing-market benchmark:
+research. Phase 5B1 adds an isolated historical pseudo-xG experiment alongside
+the reproducible LR52 pipeline, Match2Vec candidate, and separate
+closing-market benchmark:
 
 - source-shaped CSV normalization into one canonical schema;
 - strict match and natural-key integrity validation;
@@ -21,6 +22,8 @@ reproducible LR52 pipeline and separate closing-market benchmark:
 - source-verified reciprocal implied probabilities and overround removal;
 - exact-key market coverage and same-match LR52 comparison;
 - an optional, fold-local Match2Vec sequence-representation experiment;
+- a fold-local Poisson pseudo-xG experiment using only canonical match stats;
+- 12 strictly-prior pseudo-xG features in a separate LR64 candidate contract;
 - a predefined candidate gate with LR52 comparison on identical rows;
 - separated development, historical-final, and diagnostic reports;
 - deterministic, wholly synthetic raw, canonical, and separate market records;
@@ -30,8 +33,11 @@ No third-party football or odds data is committed. CI trains and evaluates
 only on invented synthetic data. LR52 remains the default internal model.
 Match2Vec improved historical development Log Loss by `0.003764` on the public
 same-date-safe protocol, below its predefined `0.005` gate, so its disposition
-is `MATCH2VEC_REJECTED_FOR_NOW`. These records are offline reproductions, not
-live forecasts, market-beating claims, or a betting service.
+is `MATCH2VEC_REJECTED_FOR_NOW`. The leakage-adapted public pseudo-xG
+reproduction improved historical development Log Loss by only `0.000039`
+(the authority reported `0.000209`), also below the gate, so its disposition
+is `XG_SIGNAL_REJECTED_FOR_NOW`. These records are offline reproductions, not
+live forecasts or claims of practical advantage.
 
 ## Install
 
@@ -99,6 +105,12 @@ train history
     -> fold-local Match2Vec sequence representation
     -> Match2Vec + exact LR52 numeric tuple
     -> identical-row candidate comparison and predefined gate
+
+train history
+    -> fold-local Poisson pseudo-xG estimator
+    -> 12 strictly-prior, within-season pseudo-xG features
+    -> LR52 + pseudo-xG candidate
+    -> identical-row LR52 comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -115,6 +127,7 @@ See:
 - [Modeling](docs/MODELING.md)
 - [Closing market benchmark](docs/MARKET_BENCHMARK.md)
 - [Match2Vec research candidate](docs/MATCH2VEC.md)
+- [Pseudo-xG research experiment](docs/PSEUDO_XG.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

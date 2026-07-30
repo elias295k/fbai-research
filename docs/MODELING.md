@@ -130,3 +130,18 @@ jointly inside each fold; this is not a second Logistic Regression.
 
 The candidate failed its development improvement threshold and remains
 experimental. Full semantics and results are in [Match2Vec](MATCH2VEC.md).
+
+## Phase 5B1 pseudo-xG boundary
+
+The second research candidate estimates completed team-side goals with a
+fold-local Poisson model over shots on target and shots off target. Its 12
+within-season, strict-prior rolling aggregates are combined with the exact 52
+stable features only inside a separate median-imputed, standardized
+Logistic Regression pipeline.
+
+Training-row transforms use season-boundary walk-forward Poisson refits so
+current or later training statistics cannot alter an earlier row. Test-row
+transforms use one estimator fitted only on the outer training window. The
+candidate neither changes nor wraps `fit_lr52`; LR52 is independently
+refitted for comparison on identical test keys. Full semantics and results
+are in [Pseudo-xG](PSEUDO_XG.md).
