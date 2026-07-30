@@ -162,3 +162,28 @@ required:
 
 The historical-final result cannot select configuration or rescue a failed
 development gate. See [Pseudo-xG](PSEUDO_XG.md).
+
+## Understat xG candidate protocol
+
+The external-xG experiment uses the same four outer folds and public metrics,
+but evaluates only divisions present in the validated external artifact.
+LR52 and the LR68 candidate use identical training and test keys. External
+rows attach to canonical history through a one-to-one exact normalized
+natural-key join with explicit source aliases.
+
+For each target side, windows 5 and 10 summarize xG for, xG against, xG
+difference, and goals minus xG from strictly earlier same-season matches.
+Same-date rows are excluded as a batch. Median imputation, scaling, and the
+candidate Logistic Regression fit only on each outer training partition.
+
+```text
+candidate_improvement_log_loss =
+    lr52_log_loss - understat_xg_candidate_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+The 2025 historical-final result cannot tune or rescue the candidate. See
+[Understat xG](UNDERSTAT_XG.md).

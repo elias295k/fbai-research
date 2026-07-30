@@ -111,6 +111,12 @@ train history
     -> 12 strictly-prior, within-season pseudo-xG features
     -> LR52 + pseudo-xG candidate
     -> identical-row LR52 comparison and predefined gate
+
+optional external research input
+    -> validated exact-key historical xG table
+    -> 16 strictly-prior, within-season xG features
+    -> LR52 + external-xG candidate
+    -> identical-row LR52 comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -128,6 +134,7 @@ See:
 - [Closing market benchmark](docs/MARKET_BENCHMARK.md)
 - [Match2Vec research candidate](docs/MATCH2VEC.md)
 - [Pseudo-xG research experiment](docs/PSEUDO_XG.md)
+- [Understat xG research experiment](docs/UNDERSTAT_XG.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

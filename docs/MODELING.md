@@ -145,3 +145,16 @@ transforms use one estimator fitted only on the outer training window. The
 candidate neither changes nor wraps `fit_lr52`; LR52 is independently
 refitted for comparison on identical test keys. Full semantics and results
 are in [Pseudo-xG](PSEUDO_XG.md).
+
+## Phase 5B2 external xG boundary
+
+The third candidate consumes a separate, validated completed-match xG table.
+It builds 16 strict-prior rolling fields with windows 5 and 10, division/team
+isolation, a season reset, and complete target-date exclusion. Those fields
+join the exact stable 52 only inside a separate LR68 candidate pipeline.
+
+Its model configuration is the source-defined median imputer, standard
+scaler, and L2 `lbfgs` Logistic Regression with `C=1`, `max_iter=2000`, and
+`random_state=42`. LR52 is fitted independently on identical
+covered-division rows. The experiment failed its development gate and remains
+optional research. See [Understat xG](UNDERSTAT_XG.md).

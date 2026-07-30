@@ -44,3 +44,15 @@ LR52-plus-12 comparison.
 The authority's outer-train transformation ambiguity is tightened with
 season-boundary walk-forward training transforms. LR52, Match2Vec, market
 records, and the stable 52-feature contract remain unchanged.
+
+## Phase 5B2: historical Understat xG
+
+Phase 5B2 adds the authoritative external aggregate-xG question without
+changing the canonical table or LR52. A separate six-column schema,
+deterministic source aliases, exact one-to-one alignment, aggregate quality
+gates, and 16 strict-prior rolling fields feed an isolated LR68 candidate.
+
+The historical artifact aligns 8,953 rows across five divisions and passes
+all source quality gates, but ends after the 2023 season start. The candidate
+is worse on weighted development Log Loss and retains the source disposition
+`XG_SIGNAL_REJECTED_FOR_NOW`. No external rows are committed or needed by CI.

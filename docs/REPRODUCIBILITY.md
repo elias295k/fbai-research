@@ -185,3 +185,19 @@ features, and runs the public pseudo-xG evaluator. It makes no provider
 request and retains no generated data, predictions, parameters, or models.
 `research/pseudo_xg/result.json` contains only aggregate/fold metadata and
 explicit comparisons with the committed authority.
+
+## Phase 5B2 synthetic and historical Understat xG paths
+
+Synthetic tests construct a separate invented external table and exercise
+schema failures, explicit aliases, duplicate detection, exact one-to-one
+alignment, coverage views, quality gates, the exact 16-feature order, and all
+four truncation invariants. Evaluation tests prove train-only preprocessing,
+identical LR52/candidate keys, H/D/A ordering, weighted aggregation, and the
+frozen gate. No network operation or external artifact is used by tests.
+
+The L3 historical reproduction reads the validated local xG parquet and local
+canonical/feature partitions in place. It does not execute a downloader,
+retain a generated table, or write into either source repository. The
+aggregate-only record reports artifact checksum, schema and coverage counts,
+fold metrics, gate values, and reference differences. It contains no raw
+rows, match predictions, fitted objects, or machine paths.

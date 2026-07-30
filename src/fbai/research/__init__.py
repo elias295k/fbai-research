@@ -13,6 +13,13 @@ from fbai.research.pseudo_xg import (
     PseudoXGConfig,
     evaluate_pseudo_xg_candidate,
 )
+from fbai.research.understat_xg import (
+    UNDERSTAT_XG_FEATURE_COLUMNS,
+    UnderstatXGComparisonReport,
+    UnderstatXGConfig,
+    align_understat_xg,
+    evaluate_understat_xg_candidate,
+)
 
 __all__ = [
     "CandidateAggregate",
@@ -23,5 +30,10 @@ __all__ = [
     "PseudoXGConfig",
     "ResearchGate",
     "ResearchGateResult",
+    "UNDERSTAT_XG_FEATURE_COLUMNS",
+    "UnderstatXGComparisonReport",
+    "UnderstatXGConfig",
+    "align_understat_xg",
+    "evaluate_understat_xg_candidate",
     "evaluate_pseudo_xg_candidate",
 ]

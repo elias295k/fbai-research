@@ -177,3 +177,15 @@ separate LR64 pipeline. Candidate-training transforms use season-boundary
 walk-forward estimator fits, while each fold's test transform uses the full
 outer training partition. The research selector explicitly approves 52 plus
 12 names, but the stable selector still accepts exactly 52.
+
+`research.understat_xg` is a third isolated branch. Its six-column external
+table is normalized separately and aligned one-to-one to canonical history.
+Only source-verified aliases are accepted. The internal history keeps
+unmatched canonical slots as missing values to preserve the authority's
+trailing-ten semantics, while aggregate reports expose no raw keys.
+
+Sixteen strict-prior, within-season xG aggregates feed a separate LR68
+pipeline. All matches on the target date are excluded together. The
+candidate's imputer, scaler, and classifier fit only on outer training rows;
+LR52 is independently refitted on identical covered-division keys. Neither
+the external table nor the 16-name contract is accepted by stable LR52.

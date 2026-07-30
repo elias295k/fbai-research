@@ -1,0 +1,447 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "understat_xg_lr68_historical_reproduction",
+  "status": "reproduced",
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "source_authority": {
+    "conversion": "FBAI_NEW/scripts/convert_kaggle_understat_to_xg_contract.py",
+    "external_contract": "FBAI_NEW/src/fbai_new/external.py",
+    "evaluation": "FBAI_NEW/scripts/run_real_xg_eval.py",
+    "tests": [
+      "FBAI_NEW/tests/test_understat_conversion.py",
+      "FBAI_NEW/tests/test_external.py"
+    ],
+    "structured_result": "FBAI_NEW/results/real_xg_eval.json",
+    "report": "FBAI_NEW/reports/XG_RESULTS.md"
+  },
+  "source_artifact": {
+    "name": "xg_real.parquet",
+    "sha256": "9f95c8dd1e13a7d19ffc137a458ddc258375773bdd719a844088824b1eb5caa8",
+    "supplied_rows": 8955,
+    "duplicate_keys": 0,
+    "invalid_xg_rows": 0
+  },
+  "protocol": {
+    "evaluation_rows_in_covered_divisions": 12458,
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "outer_split": "expanding SeasonStartYear with strict train dates before test dates",
+    "alignment": "one-to-one exact normalized natural key with source-verified aliases only",
+    "same_date_policy": "all matches on a target date are excluded as one information batch",
+    "history_policy": "strictly earlier date within division, team, and SeasonStartYear",
+    "history_window_policy": "last ten canonical matches, then same-season restriction and present-xG filtering",
+    "partial_window_policy": "use every present value in the trailing 5 or 10 slots",
+    "aggregation": "test-sample-count-weighted"
+  },
+  "alignment": {
+    "covered_divisions": [
+      "D1",
+      "E0",
+      "F1",
+      "I1",
+      "SP1"
+    ],
+    "covered_season_start_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "covered_league_seasons": 25,
+    "aligned_rows": 8953,
+    "unmatched_canonical_rows": 3505,
+    "unmatched_external_rows": 2,
+    "by_division": {
+      "D1": {
+        "canonical_rows": 2142,
+        "aligned_rows": 1530
+      },
+      "E0": {
+        "canonical_rows": 2660,
+        "aligned_rows": 1900
+      },
+      "F1": {
+        "canonical_rows": 2336,
+        "aligned_rows": 1724
+      },
+      "I1": {
+        "canonical_rows": 2660,
+        "aligned_rows": 1899
+      },
+      "SP1": {
+        "canonical_rows": 2660,
+        "aligned_rows": 1900
+      }
+    },
+    "claimed_league_season_coverage": {
+      "complete_league_seasons": 23,
+      "incomplete": {
+        "F1/2022": {
+          "canonical_rows": 380,
+          "aligned_rows": 379,
+          "coverage": 0.9973684210526316
+        },
+        "I1/2023": {
+          "canonical_rows": 380,
+          "aligned_rows": 379,
+          "coverage": 0.9973684210526316
+        }
+      },
+      "minimum": 0.9973684210526316
+    },
+    "evaluation_fold_alignment": {
+      "2022": {
+        "canonical_rows": 1826,
+        "aligned_rows": 1825,
+        "coverage": 0.9994523548740416
+      },
+      "2023": {
+        "canonical_rows": 1752,
+        "aligned_rows": 1751,
+        "coverage": 0.9994292237442922
+      },
+      "2024": {
+        "canonical_rows": 1752,
+        "aligned_rows": 0,
+        "coverage": 0.0
+      },
+      "2025": {
+        "canonical_rows": 1751,
+        "aligned_rows": 0,
+        "coverage": 0.0
+      }
+    },
+    "quality": {
+      "value_coverage": 1.0,
+      "xg_range": [
+        0.0,
+        6.88189
+      ],
+      "league_season_side_mean_range": [
+        1.0603982749103944,
+        1.9220321434210528
+      ],
+      "goals_correlation": 0.6330834194183275,
+      "passed": true
+    }
+  },
+  "external_xg": {
+    "observation_timing": "final post-match values usable only as history for later fixtures",
+    "rolling_windows": [
+      5,
+      10
+    ],
+    "season_reset": true,
+    "feature_count": 16,
+    "feature_names": [
+      "XgForAvg5_H_xg_pre",
+      "XgAgainstAvg5_H_xg_pre",
+      "XgDiffAvg5_H_xg_pre",
+      "GminusXgForAvg5_H_xg_pre",
+      "XgForAvg10_H_xg_pre",
+      "XgAgainstAvg10_H_xg_pre",
+      "XgDiffAvg10_H_xg_pre",
+      "GminusXgForAvg10_H_xg_pre",
+      "XgForAvg5_A_xg_pre",
+      "XgAgainstAvg5_A_xg_pre",
+      "XgDiffAvg5_A_xg_pre",
+      "GminusXgForAvg5_A_xg_pre",
+      "XgForAvg10_A_xg_pre",
+      "XgAgainstAvg10_A_xg_pre",
+      "XgDiffAvg10_A_xg_pre",
+      "GminusXgForAvg10_A_xg_pre"
+    ],
+    "feature_coverage_by_fold": {
+      "2022": 0.9731653888280394,
+      "2023": 0.9726027397260274,
+      "2024": 0.0,
+      "2025": 0.0
+    }
+  },
+  "candidate": {
+    "name": "LR52 + 16 historical Understat xG features",
+    "base_feature_count": 52,
+    "total_feature_count": 68,
+    "imputation": "median fitted on candidate training rows",
+    "scaling": "standard fitted on candidate training rows",
+    "classifier": "LogisticRegression",
+    "solver": "lbfgs",
+    "effective_penalty": "l2",
+    "C": 1.0,
+    "max_iter": 2000,
+    "fit_intercept": true,
+    "class_weight": null,
+    "random_state": 42,
+    "tolerance": 0.0001,
+    "output_order": [
+      "H",
+      "D",
+      "A"
+    ]
+  },
+  "folds": [
+    {
+      "fold_name": "train_through_2021_test_2022",
+      "test_year": 2022,
+      "role": "development",
+      "train_rows": 5377,
+      "test_rows": 1826,
+      "candidate_preprocessing_fit_rows": 5377,
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 1826,
+        "log_loss": 1.0064165758052874,
+        "brier_score": 0.6011602339254243,
+        "ece": 0.03495433564029246
+      },
+      "candidate": {
+        "n_samples": 1826,
+        "log_loss": 1.003708680562287,
+        "brier_score": 0.5993350780526104,
+        "ece": 0.029645318446312057
+      },
+      "candidate_improvement_log_loss": 0.0027078952430004133
+    },
+    {
+      "fold_name": "train_through_2022_test_2023",
+      "test_year": 2023,
+      "role": "development",
+      "train_rows": 7203,
+      "test_rows": 1752,
+      "candidate_preprocessing_fit_rows": 7203,
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 1752,
+        "log_loss": 0.983742619936515,
+        "brier_score": 0.5857053813053267,
+        "ece": 0.010072527799639672
+      },
+      "candidate": {
+        "n_samples": 1752,
+        "log_loss": 0.9834643341084679,
+        "brier_score": 0.5856802993803454,
+        "ece": 0.016107738932363686
+      },
+      "candidate_improvement_log_loss": 0.0002782858280471201
+    },
+    {
+      "fold_name": "train_through_2023_test_2024",
+      "test_year": 2024,
+      "role": "development",
+      "train_rows": 8955,
+      "test_rows": 1752,
+      "candidate_preprocessing_fit_rows": 8955,
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 1752,
+        "log_loss": 0.9953065356284997,
+        "brier_score": 0.5940088600128535,
+        "ece": 0.03256806163331916
+      },
+      "candidate": {
+        "n_samples": 1752,
+        "log_loss": 1.0121487584152666,
+        "brier_score": 0.6053828889907159,
+        "ece": 0.023558892293371925
+      },
+      "candidate_improvement_log_loss": -0.016842222786766947
+    },
+    {
+      "fold_name": "train_through_2024_test_2025",
+      "test_year": 2025,
+      "role": "historical_final",
+      "train_rows": 10707,
+      "test_rows": 1751,
+      "candidate_preprocessing_fit_rows": 10707,
+      "identical_test_rows": true,
+      "lr52": {
+        "n_samples": 1751,
+        "log_loss": 0.9998469832869569,
+        "brier_score": 0.5962125432063012,
+        "ece": 0.009672357426447372
+      },
+      "candidate": {
+        "n_samples": 1751,
+        "log_loss": 1.0034994954099294,
+        "brier_score": 0.5984465867534714,
+        "ece": 0.012443917815229768
+      },
+      "candidate_improvement_log_loss": -0.003652512122972573
+    }
+  ],
+  "development": {
+    "name": "development",
+    "fold_count": 3,
+    "lr52": {
+      "n_samples": 5330,
+      "log_loss": 0.9953115924897488,
+      "brier_score": 0.5937294442659055,
+      "ece": 0.025991168774055894
+    },
+    "candidate": {
+      "n_samples": 5330,
+      "log_loss": 0.9998285532473394,
+      "brier_score": 0.5968346263696371,
+      "ece": 0.023194801011342327
+    },
+    "candidate_improvement_log_loss": -0.004516960757590671
+  },
+  "historical_final": {
+    "name": "historical_final",
+    "fold_count": 1,
+    "lr52": {
+      "n_samples": 1751,
+      "log_loss": 0.9998469832869569,
+      "brier_score": 0.5962125432063012,
+      "ece": 0.009672357426447372
+    },
+    "candidate": {
+      "n_samples": 1751,
+      "log_loss": 1.0034994954099294,
+      "brier_score": 0.5984465867534714,
+      "ece": 0.012443917815229768
+    },
+    "candidate_improvement_log_loss": -0.003652512122972573
+  },
+  "all_historical_diagnostic": {
+    "name": "all_historical_diagnostic",
+    "fold_count": 4,
+    "lr52": {
+      "n_samples": 7081,
+      "log_loss": 0.9964331105360573,
+      "brier_score": 0.5943434685908078,
+      "ece": 0.021955829320636527
+    },
+    "candidate": {
+      "n_samples": 7081,
+      "log_loss": 1.0007363091754138,
+      "brier_score": 0.5972332342826571,
+      "ece": 0.020536306946041794
+    },
+    "candidate_improvement_log_loss": -0.004303198639356465
+  },
+  "success_gate": {
+    "definition": {
+      "primary_metric": "development_sample_count_weighted_log_loss",
+      "improvement_sign_convention": "lr52_log_loss_minus_candidate_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "development_fold_count": 3
+    },
+    "observed": {
+      "candidate_improvement_log_loss": -0.004516960757590671,
+      "improving_fold_count": 2,
+      "historical_final_improvement_log_loss": -0.003652512122972573
+    },
+    "passed": false,
+    "disposition": "XG_SIGNAL_REJECTED_FOR_NOW"
+  },
+  "reference_comparison": {
+    "authoritative_reference": "FBAI_NEW/results/real_xg_eval.json primary",
+    "match_level_probability_parity": "unavailable",
+    "comparison_tolerances": {
+      "log_loss": 0.00001,
+      "brier_score": 0.00001,
+      "ece": 0.001
+    },
+    "reference_values": {
+      "folds": {
+        "2022": {
+          "log_loss": 1.0037086733970744,
+          "brier_score": 0.5993350727974723,
+          "ece": 0.029645318385410784
+        },
+        "2023": {
+          "log_loss": 0.9834580158503328,
+          "brier_score": 0.5856771637647717,
+          "ece": 0.01589340981358363
+        },
+        "2024": {
+          "log_loss": 1.0121480420589561,
+          "brier_score": 0.6053824345436116,
+          "ece": 0.022987717726772904
+        },
+        "2025": {
+          "log_loss": 1.0034974609979455,
+          "brier_score": 0.5984454745182789,
+          "ece": 0.012443141781455716
+        }
+      },
+      "development": {
+        "log_loss": 0.9998262384765726,
+        "brier_score": 0.5968334444961486,
+        "ece": 0.022936601655246667,
+        "candidate_improvement_log_loss": -0.0045146486257110485,
+        "improving_fold_count": 2
+      },
+      "historical_final": {
+        "log_loss": 1.0034974609979455,
+        "brier_score": 0.5984454745182789,
+        "ece": 0.012443141781455716
+      },
+      "all_historical_diagnostic": {
+        "log_loss": 1.0007340637321753,
+        "brier_score": 0.5972320696294279,
+        "ece": 0.02034176360426404
+      }
+    },
+    "absolute_differences": {
+      "folds": {
+        "2022": {
+          "log_loss": 7.165212645432462e-9,
+          "brier_score": 5.255138102455703e-9,
+          "ece": 6.09012736074721e-11
+        },
+        "2023": {
+          "log_loss": 0.00000631825813512954,
+          "brier_score": 0.0000031356155736350644,
+          "ece": 0.00021432911878005445
+        },
+        "2024": {
+          "log_loss": 7.163563104928272e-7,
+          "brier_score": 4.5444710428110824e-7,
+          "ece": 0.0005711745665990219
+        },
+        "2025": {
+          "log_loss": 0.0000020344119839865726,
+          "brier_score": 0.0000011122351925019203,
+          "ece": 7.760337740522066e-7
+        }
+      },
+      "development": {
+        "log_loss": 0.0000023147707668425,
+        "brier_score": 0.0000011818734885205018,
+        "ece": 0.0002581993560956605
+      },
+      "historical_final": {
+        "log_loss": 0.0000020344119839865726,
+        "brier_score": 0.0000011122351925019203,
+        "ece": 7.760337740522066e-7
+      },
+      "all_historical_diagnostic": {
+        "log_loss": 0.000002245443238457767,
+        "brier_score": 0.000001164653229190904,
+        "ece": 0.00019454334177775381
+      }
+    },
+    "reproduction_passed": true,
+    "verdict": "pass_with_numerical_order_drift"
+  },
+  "verdict": "failed_gate",
+  "disposition": "XG_SIGNAL_REJECTED_FOR_NOW",
+  "limitations": [
+    "The available artifact covers five divisions and season starts 2019 through 2023 only.",
+    "The 2024 and 2025 test folds have no within-season external-xG history after the season reset.",
+    "Final xG observations describe completed matches and are never valid same-match predictors.",
+    "The historical archive and match-level outputs are not redistributed."
+  ]
+}
