@@ -200,3 +200,11 @@ unverified injury label may enter the candidate. Histories reset by season and
 update only after a complete date batch. Coverage filtering is applied before
 both candidate and LR52 fitting, so their test keys are identical. The failed
 candidate remains research-only. See [Player availability](PLAYER_AVAILABILITY.md).
+
+## Public v1 model decision
+
+The six advanced candidates remain isolated research branches. None passed its
+predefined development gate, so Phase 5D retains the unchanged LR52 pipeline as
+the sole default internal model. The catalogue is reporting code only: it adds
+no feature, estimator, fitting path, or dependency. Closing market probabilities
+remain an external benchmark rather than a candidate or production model.

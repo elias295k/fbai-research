@@ -265,3 +265,15 @@ required:
 ```
 
 See [Player availability](PLAYER_AVAILABILITY.md).
+
+## Public v1 closure rule
+
+Phase 5D introduces no new evaluation. It recomputes and validates each stored
+candidate improvement and gate from the committed authorities. Candidate raw
+Log Loss is never compared across population identifiers. The closing market
+is reported as an external late-information benchmark and has no `0.005` gate.
+
+LR52 remains selected precisely because all six internal candidates have a
+false development-gate verdict. This yields `DATA_CEILING_UPHELD` within the
+frozen programme; it does not assert a universal modelling ceiling. See
+[Research summary](RESEARCH_SUMMARY.md).

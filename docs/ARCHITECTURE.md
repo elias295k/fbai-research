@@ -214,3 +214,17 @@ history. Each outer fold creates a fresh SVD basis and separate graph-only and
 LR52-plus-graph Logistic Regression pipelines. Stable LR52 never accepts
 graph fields, and graph records contain counts rather than node labels, edge
 lists, embeddings, or learned parameters.
+
+## Public v1 synthesis boundary
+
+`research.catalog` is a read-only presentation layer over an explicit allowlist
+of eight committed aggregate result records. It neither fits models nor scans
+the repository. Shape-specific adapters validate and normalize the baseline,
+external benchmark, and six candidates; hashes bind the generated synthesis to
+the exact authorities.
+
+Population identifiers are part of the comparison contract. Raw Log Loss
+ranking across different identifiers is rejected; only identical-row,
+within-experiment improvement over aligned LR52 can order candidates. The
+closing market retains the distinct `external_benchmark` role and cannot enter
+internal-model selection.

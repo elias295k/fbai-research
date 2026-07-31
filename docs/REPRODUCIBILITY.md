@@ -251,3 +251,16 @@ all 63 columns match the source cache cell-for-cell. Only aggregate source
 quality, coverage, fold metrics, gate values, and bounded reference differences
 are retained. Player rows, lineups, raw data, predictions, learned state,
 machine paths, and generated datasets are excluded.
+
+## Phase 5D synthesis path
+
+The v1 synthesis loads only eight explicitly allowlisted committed JSON
+records. It validates their schemas, sample alignment, improvement arithmetic,
+fold evidence, frozen gates, unique experiment identifiers, and SHA-256 hashes.
+No provider request, model fitting, or repository discovery occurs.
+
+`research/summary/result.json` must equal `ResearchCatalog.to_summary_dict()`.
+Tests also prove that cross-population raw-Log-Loss ranking is rejected and
+that the synthesis contains no raw rows, predictions, learned state,
+credentials, or machine-specific paths. The protected result-record hash test
+makes any accidental rewrite visible.

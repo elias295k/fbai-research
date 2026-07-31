@@ -1,5 +1,14 @@
 """Optional, isolated research candidates built on the stable public pipeline."""
 
+from fbai.research.catalog import (
+    PROGRAMME_CONCLUSION,
+    RESULT_ALLOWLIST,
+    CatalogValidationError,
+    CrossPopulationComparisonError,
+    ResearchCatalog,
+    build_research_catalog,
+    load_research_catalog,
+)
 from fbai.research.common import (
     CandidateAggregate,
     CandidateComparisonReport,
@@ -42,6 +51,8 @@ __all__ = [
     "CandidateAggregate",
     "CandidateComparisonReport",
     "CandidateFoldEvaluation",
+    "CatalogValidationError",
+    "CrossPopulationComparisonError",
     "AUTHORITATIVE_CONFIGS",
     "AUTHORITATIVE_GRAPH_CONFIGS",
     "DeepCapacityComparisonReport",
@@ -51,17 +62,22 @@ __all__ = [
     "PRIOR_AVAILABILITY_FEATURES",
     "AvailabilityComparisonReport",
     "PSEUDO_XG_FEATURE_COLUMNS",
+    "PROGRAMME_CONCLUSION",
     "PseudoXGComparisonReport",
     "PseudoXGConfig",
     "ResearchGate",
     "ResearchGateResult",
+    "ResearchCatalog",
+    "RESULT_ALLOWLIST",
     "UNDERSTAT_XG_FEATURE_COLUMNS",
     "UnderstatXGComparisonReport",
     "UnderstatXGConfig",
     "align_understat_xg",
+    "build_research_catalog",
     "evaluate_deep_capacity",
     "evaluate_graph_model",
     "evaluate_player_availability",
     "evaluate_understat_xg_candidate",
     "evaluate_pseudo_xg_candidate",
+    "load_research_catalog",
 ]

@@ -40,6 +40,17 @@ reproduction improved historical development Log Loss by only `0.000039`
 is `XG_SIGNAL_REJECTED_FOR_NOW`. These records are offline reproductions, not
 live forecasts or claims of practical advantage.
 
+Public v1 is closed with `DATA_CEILING_UPHELD`: none of Match2Vec, pseudo-xG,
+Understat xG, controlled deep capacity, graph SVD, or player availability
+passed its frozen development gate. LR52 therefore remains the default. The
+closing market is a separate late-information external benchmark and is not
+subject to that gate. This conclusion is bounded to the tested data and
+protocol; it is not proof of a universal data ceiling. See the
+[research summary](docs/RESEARCH_SUMMARY.md) and
+[limitations](docs/RESEARCH_LIMITATIONS.md).
+The repository demonstrates reproducible negative research, not a live
+forecasting or betting service.
+
 ## Install
 
 Python 3.11 or 3.12 is recommended.
@@ -157,6 +168,8 @@ See:
 - [Deep-capacity research experiment](docs/DEEP_CAPACITY.md)
 - [Temporal graph-model research experiment](docs/GRAPH_MODEL.md)
 - [Player-availability research experiment](docs/PLAYER_AVAILABILITY.md)
+- [Public v1 research summary](docs/RESEARCH_SUMMARY.md)
+- [Research limitations](docs/RESEARCH_LIMITATIONS.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

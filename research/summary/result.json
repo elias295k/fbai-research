@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0",
+  "programme_id": "football_outcome_lab_public_v1",
+  "status": "closed_research_programme",
+  "default_model": {
+    "name": "LR52",
+    "experiment_id": "lr52_baseline_historical_reproduction",
+    "selected": true,
+    "reason": "No tested advanced candidate passed its predefined development gate."
+  },
+  "conclusion": "DATA_CEILING_UPHELD",
+  "baseline": {
+    "experiment_id": "lr52_baseline_historical_reproduction",
+    "name": "LR52",
+    "role": "baseline",
+    "population_id": "nine_league_canonical_22617",
+    "population_description": "Nine-league canonical historical population",
+    "development": {
+      "n_samples": 9752,
+      "log_loss": 0.9916837453388027,
+      "brier_score": 0.591113713827928,
+      "ece": 0.015674124535309024
+    },
+    "historical_final": {
+      "n_samples": 3226,
+      "log_loss": 1.0065031448028119,
+      "brier_score": 0.6025104774179937,
+      "ece": 0.023997950842338828
+    },
+    "selected_as_default": true
+  },
+  "external_benchmark": {
+    "experiment_id": "closing_market_benchmark_historical_reproduction",
+    "name": "Closing market",
+    "role": "external_benchmark",
+    "population_id": "nine_league_canonical_22617",
+    "population_description": "Nine-league canonical rows with complete closing prices",
+    "development_samples": 9752,
+    "aligned_lr52_log_loss": 0.9916837453388027,
+    "benchmark_log_loss": 0.9663318418439923,
+    "benchmark_advantage_log_loss": 0.025351903494810313,
+    "historical_final_advantage_log_loss": 0.021732721047909354,
+    "gate_applicable": false,
+    "coverage_note": "Exact-key coverage is 100% for the committed 22,617-row market table.",
+    "timing_limitation": "Closing prices are a near-kickoff external benchmark, not an internal candidate."
+  },
+  "candidates": [
+    {
+      "experiment_id": "match2vec_sequence_hybrid_historical_reproduction",
+      "name": "Match2Vec",
+      "role": "research_candidate",
+      "population_id": "nine_league_canonical_22617",
+      "population_description": "Nine-league canonical historical population",
+      "development_samples": 9752,
+      "aligned_lr52_log_loss": 0.9916837453388027,
+      "candidate_log_loss": 0.9879197492495337,
+      "candidate_improvement_log_loss": 0.0037639960892689173,
+      "improving_development_folds": 3,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed_gate",
+      "disposition": "MATCH2VEC_REJECTED_FOR_NOW",
+      "historical_final_improvement_log_loss": 0.006135893279204829,
+      "coverage_note": "Uses the full canonical LR52 comparison population.",
+      "timing_limitation": "Sequences and descriptors use earlier matches; 2025 has already been examined historically.",
+      "selected_as_default": false
+    },
+    {
+      "experiment_id": "pseudo_xg_lr64_historical_reproduction",
+      "name": "Pseudo-xG",
+      "role": "research_candidate",
+      "population_id": "nine_league_canonical_22617",
+      "population_description": "Nine-league canonical historical population",
+      "development_samples": 9752,
+      "aligned_lr52_log_loss": 0.9916837453388027,
+      "candidate_log_loss": 0.9916447716036356,
+      "candidate_improvement_log_loss": 3.897373516703606e-05,
+      "improving_development_folds": 1,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed_gate",
+      "disposition": "XG_SIGNAL_REJECTED_FOR_NOW",
+      "historical_final_improvement_log_loss": 0.0008465763101936918,
+      "coverage_note": "Uses the full canonical LR52 comparison population.",
+      "timing_limitation": "Pseudo-xG is estimated from completed prior match statistics, not same-match shot quality.",
+      "selected_as_default": false
+    },
+    {
+      "experiment_id": "understat_xg_lr68_historical_reproduction",
+      "name": "Understat xG",
+      "role": "research_candidate",
+      "population_id": "big5_external_xg_partial_8953",
+      "population_description": "Big-5 canonical population with partial historical external-xG coverage",
+      "development_samples": 5330,
+      "aligned_lr52_log_loss": 0.9953115924897488,
+      "candidate_log_loss": 0.9998285532473394,
+      "candidate_improvement_log_loss": -0.004516960757590671,
+      "improving_development_folds": 2,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed_gate",
+      "disposition": "XG_SIGNAL_REJECTED_FOR_NOW",
+      "historical_final_improvement_log_loss": -0.003652512122972573,
+      "coverage_note": "8,953 aligned historical rows; external xG ends after season start 2023 and later folds lack within-season xG history.",
+      "timing_limitation": "Final post-match xG is used only as lagged history for later fixtures.",
+      "selected_as_default": false
+    },
+    {
+      "experiment_id": "deep_capacity_lr52_historical_reproduction",
+      "name": "Deep MLP",
+      "role": "research_candidate",
+      "population_id": "nine_league_canonical_22617",
+      "population_description": "Nine-league canonical historical population",
+      "development_samples": 9752,
+      "aligned_lr52_log_loss": 0.9916654877395729,
+      "candidate_log_loss": 0.9915013638768383,
+      "candidate_improvement_log_loss": 0.00016412386273456647,
+      "improving_development_folds": 2,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed_gate",
+      "disposition": "DATA_CEILING_UPHELD",
+      "historical_final_improvement_log_loss": -0.00011216044663298064,
+      "coverage_note": "Uses the full canonical LR52 comparison population.",
+      "timing_limitation": "The complete-date public validation split changed the selected architecture; 2025 is historical, not currently unseen.",
+      "selected_as_default": false
+    },
+    {
+      "experiment_id": "temporal_graph_embedding_internal_historical_reproduction",
+      "name": "Graph SVD8",
+      "role": "research_candidate",
+      "population_id": "big5_transfermarkt_exact_12452",
+      "population_description": "Exact-key Big-5 Transfermarkt-covered population",
+      "development_samples": 5328,
+      "aligned_lr52_log_loss": 0.9954333648271911,
+      "candidate_log_loss": 0.9939771249939139,
+      "candidate_improvement_log_loss": 0.0014562398332772508,
+      "improving_development_folds": 2,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed_gate",
+      "disposition": "DATA_CEILING_UPHELD",
+      "historical_final_improvement_log_loss": -0.0007137808761467079,
+      "coverage_note": "12,452 matched rows; development contains 5,328 identical candidate/LR52 rows.",
+      "timing_limitation": "Graph relations and representations use completed earlier dates only.",
+      "selected_as_default": false
+    },
+    {
+      "experiment_id": "prior_player_availability_lr115_historical_reproduction",
+      "name": "Player availability",
+      "role": "research_candidate",
+      "population_id": "big5_transfermarkt_exact_12452",
+      "population_description": "Exact-key Big-5 Transfermarkt-covered population",
+      "development_samples": 5328,
+      "aligned_lr52_log_loss": 0.9954299935951213,
+      "candidate_log_loss": 0.9993235987731137,
+      "candidate_improvement_log_loss": -0.003893605177992421,
+      "improving_development_folds": 1,
+      "required_gate": {
+        "primary_metric": "development_sample_count_weighted_log_loss",
+        "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+        "minimum_improvement_log_loss": 0.005,
+        "minimum_improving_folds": 2,
+        "development_fold_count": 3
+      },
+      "gate_passed": false,
+      "verdict": "failed",
+      "disposition": "PLAYER_AVAILABILITY_REJECTED_FOR_NOW",
+      "historical_final_improvement_log_loss": -0.00097412795877172,
+      "coverage_note": "12,452 of 12,458 canonical Big-5 rows; filtering changes the aligned LR52 population.",
+      "timing_limitation": "Target lineup and bench timestamps are unknown and excluded; only completed-prior history is used.",
+      "selected_as_default": false
+    }
+  ],
+  "gate_policy": {
+    "primary_metric": "development_sample_count_weighted_log_loss",
+    "improvement_sign_convention": "aligned_lr52_log_loss_minus_candidate_log_loss",
+    "minimum_improvement_log_loss": 0.005,
+    "minimum_improving_folds": 2,
+    "development_fold_count": 3
+  },
+  "candidate_ranking_by_valid_development_improvement": [
+    {
+      "rank": 1,
+      "experiment_id": "match2vec_sequence_hybrid_historical_reproduction",
+      "name": "Match2Vec",
+      "candidate_improvement_log_loss": 0.0037639960892689173,
+      "population_id": "nine_league_canonical_22617",
+      "raw_score_ranked_across_populations": false
+    },
+    {
+      "rank": 2,
+      "experiment_id": "temporal_graph_embedding_internal_historical_reproduction",
+      "name": "Graph SVD8",
+      "candidate_improvement_log_loss": 0.0014562398332772508,
+      "population_id": "big5_transfermarkt_exact_12452",
+      "raw_score_ranked_across_populations": false
+    },
+    {
+      "rank": 3,
+      "experiment_id": "deep_capacity_lr52_historical_reproduction",
+      "name": "Deep MLP",
+      "candidate_improvement_log_loss": 0.00016412386273456647,
+      "population_id": "nine_league_canonical_22617",
+      "raw_score_ranked_across_populations": false
+    },
+    {
+      "rank": 4,
+      "experiment_id": "pseudo_xg_lr64_historical_reproduction",
+      "name": "Pseudo-xG",
+      "candidate_improvement_log_loss": 3.897373516703606e-05,
+      "population_id": "nine_league_canonical_22617",
+      "raw_score_ranked_across_populations": false
+    },
+    {
+      "rank": 5,
+      "experiment_id": "prior_player_availability_lr115_historical_reproduction",
+      "name": "Player availability",
+      "candidate_improvement_log_loss": -0.003893605177992421,
+      "population_id": "big5_transfermarkt_exact_12452",
+      "raw_score_ranked_across_populations": false
+    },
+    {
+      "rank": 6,
+      "experiment_id": "understat_xg_lr68_historical_reproduction",
+      "name": "Understat xG",
+      "candidate_improvement_log_loss": -0.004516960757590671,
+      "population_id": "big5_external_xg_partial_8953",
+      "raw_score_ranked_across_populations": false
+    }
+  ],
+  "coverage_notes": [
+    "Raw candidate Log Loss is never ranked across different coverage populations.",
+    "Every improvement is computed against LR52 on that candidate's own aligned rows.",
+    "Population identifiers make differing evaluation scopes explicit."
+  ],
+  "limitations": [
+    "The evidence is observational historical evaluation, not a causal experiment.",
+    "Candidate populations and coverage differ, so raw Log Loss is not ranked across experiments.",
+    "Post-match participation and xG variables are used only as lagged completed-match history.",
+    "Broad, timestamp-verified pre-kickoff availability and lineup data is incomplete.",
+    "The 2025 historical-final folds have already been examined; there is no current unseen final set.",
+    "The conclusion does not prove LR52 is globally optimal or that no future model can improve.",
+    "The conclusion does not prove the market cannot be approached.",
+    "No causal, profitability, operational-utility, live-data, or deployment claim is made."
+  ],
+  "next_research_priorities": [
+    "Acquire broad, timestamp-verified pre-kickoff availability, lineup, injury, and suspension data.",
+    "Add timestamped transfer and manager-change context with explicit effective dates.",
+    "Evaluate richer event and shot-location data with broad season and division coverage.",
+    "Create a new untouched temporal final set before any future candidate selection.",
+    "Source-verify the completed market-derived and legacy tree/interaction audits in later phases rather than mixing their raw scores into v1."
+  ],
+  "source_inventory": [
+    {"experiment_name": "LR52 baseline", "executable_authority": "new baseline runner", "structured_result": "new baseline record", "public_representation": "complete", "exclusion_reason": null},
+    {"experiment_name": "Match2Vec sequence audit", "executable_authority": "new Match2Vec runner", "structured_result": "new Match2Vec development and final records", "public_representation": "complete", "exclusion_reason": null},
+    {"experiment_name": "Pseudo-xG audit", "executable_authority": "new xG runner", "structured_result": "new xG evaluation record", "public_representation": "complete", "exclusion_reason": null},
+    {"experiment_name": "Real historical xG audit", "executable_authority": "new real-xG runner", "structured_result": "new real-xG evaluation record", "public_representation": "complete as Understat xG", "exclusion_reason": null},
+    {"experiment_name": "Deep model audit", "executable_authority": "new deep audit runner", "structured_result": "new deep audit record", "public_representation": "internal capacity context represented", "exclusion_reason": "Market and timing-uncertain availability neural contexts remain outside the internal-candidate catalogue."},
+    {"experiment_name": "Temporal graph embedding audit", "executable_authority": "new graph audit runner", "structured_result": "new graph evaluation record", "public_representation": "internal LR52 plus graph context represented", "exclusion_reason": "Market and combined availability contexts are outside the Phase 5C2 contract."},
+    {"experiment_name": "Player-availability audit", "executable_authority": "new availability runner", "structured_result": "new availability evaluation record", "public_representation": "strictly-prior context represented", "exclusion_reason": "Target official lineup and bench context lacks source publication timestamps and is excluded."},
+    {"experiment_name": "Market-aware combination audit", "executable_authority": "new market-aware runner", "structured_result": "new market-aware record", "public_representation": "closing benchmark represented", "exclusion_reason": "Fitted odds calibration, blends, and market-plus-internal candidates require a separate public market-derived synthesis phase."},
+    {"experiment_name": "Odds-movement audit", "executable_authority": "new odds-movement runner", "structured_result": "new odds-movement record", "public_representation": "closing benchmark represented", "exclusion_reason": "Movement and market-plus-internal candidates are outside the six internal advanced candidates."},
+    {"experiment_name": "Odds-derived feature and stacking audit", "executable_authority": "new odds-feature runner", "structured_result": "new odds-feature record", "public_representation": "not represented", "exclusion_reason": "Completed market-derived candidate family is proposed for a later source-verification phase."},
+    {"experiment_name": "Open candidate discovery audit", "executable_authority": "new open-candidate runner", "structured_result": "new open-candidate record", "public_representation": "not represented", "exclusion_reason": "Completed recalibration and stacking families are proposed for a later source-verification phase."},
+    {"experiment_name": "Match2Vec robustness and final audit", "executable_authority": "new robustness and final runners", "structured_result": "new robustness and final records", "public_representation": "supporting evidence under Match2Vec", "exclusion_reason": "Supporting stages are not separate candidate families."},
+    {"experiment_name": "Legacy model-family comparison", "executable_authority": "legacy family-comparison runner", "structured_result": "legacy family-comparison metrics", "public_representation": "not represented", "exclusion_reason": "Legacy split and schema differ from the stable public protocol; source verification is proposed later."},
+    {"experiment_name": "Legacy model exploration and tuning", "executable_authority": "legacy exploration runner", "structured_result": "legacy exploration metrics", "public_representation": "not represented", "exclusion_reason": "Legacy validation and test semantics require a separate audit before public normalization."},
+    {"experiment_name": "Legacy static style clustering", "executable_authority": "legacy clustering runner", "structured_result": "legacy clustering metrics", "public_representation": "not represented", "exclusion_reason": "Legacy fold and feature contracts require a separate source-verification phase."},
+    {"experiment_name": "Legacy opponent-style interactions", "executable_authority": "legacy interaction runner", "structured_result": "legacy interaction metrics", "public_representation": "not represented", "exclusion_reason": "Legacy fold and feature contracts require a separate source-verification phase."},
+    {"experiment_name": "Legacy walk-forward robustness", "executable_authority": "legacy walk-forward runner", "structured_result": "legacy walk-forward metrics", "public_representation": "not represented", "exclusion_reason": "This is a protocol robustness study rather than one of the six normalized advanced candidates."}
+  ],
+  "protected_record_hashes": [
+    {"record_id": "lr52_baseline", "sha256": "d4702d3cf19f5c24d51dab16615de756f648c1451a66b961dc29f2df576c8436"},
+    {"record_id": "closing_market_benchmark", "sha256": "9780c5e00558299fc94ed14344cdc1963e51c9057e599720ff29d0190fe80b7e"},
+    {"record_id": "match2vec", "sha256": "6f4d4dd542c3ab2766620119e3523931ff77de5faee6f5d32794f5422a3c0823"},
+    {"record_id": "pseudo_xg", "sha256": "dade286249742bcb74508a9eb581d98ec01bdf0a512ca2e232fb0649db0b4551"},
+    {"record_id": "understat_xg", "sha256": "994962f1026ecbd4b84c5ea2c07364e9d5eded4c20634e60c0a35ad5bf0c34b2"},
+    {"record_id": "deep_capacity", "sha256": "d70cf0ad6b241cc3570412ebd0e21052672135e8ec7a87a01016b6634213a40f"},
+    {"record_id": "graph_model", "sha256": "b8e6777a33bbd240de161b3556a3fb2db0f3c2cee31cf78a28da7c5796f97069"},
+    {"record_id": "player_availability", "sha256": "7a1d0c74fd5c4dd4636300a2b6b8440ad1bf29e0c4713d9da809e176c3377cfc"}
+  ]
+}

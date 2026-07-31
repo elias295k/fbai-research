@@ -82,3 +82,27 @@ authority within `1e-8`: SVD8 plus LR52 improves development Log Loss by only
 `0.001456` and reverses on final. The gate fails and
 `DATA_CEILING_UPHELD` remains. Market and availability branches are excluded,
 LR52 remains default, and no graph artifact or prior result is changed.
+
+## Phase 5C3: player availability
+
+Phase 5C3 ports only source fields that can be reconstructed from completed
+prior matches and strictly earlier valuations. It excludes target official
+lineups, bench membership, participation, minutes, and substitutions because
+their pre-kickoff timing is not established by the source artifact.
+
+The safe 63-feature candidate is worse than aligned LR52 in development and
+historical-final evaluation. It fails the frozen gate, remains research-only,
+and leaves the stable 52-feature model unchanged.
+
+## Phase 5D: public v1 closure
+
+Phase 5D catalogues the baseline, the external closing-market benchmark, and
+all six public advanced candidates without rerunning or rewriting them. It
+validates the authorities, ranks only within-experiment improvement, records
+the remaining completed source experiments for later verification, and makes
+the programme limitations explicit.
+
+No advanced candidate passed its development gate. Public v1 therefore closes
+with `DATA_CEILING_UPHELD` and LR52 as the default. This is a bounded research
+decision, not proof that better information or future methods cannot improve
+the task.
