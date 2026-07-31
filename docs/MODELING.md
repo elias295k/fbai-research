@@ -171,3 +171,19 @@ Complete dates remain indivisible during early stopping. Development folds
 select the architecture; 2025 is evaluated only once for that selection.
 Neither network wraps or changes LR52, and neither is part of the default
 model path. See [Deep capacity](DEEP_CAPACITY.md).
+
+## Phase 5C2 temporal graph-model boundary
+
+The graph audit retains the source's dependency-light team-player bipartite
+SVD design. Accumulated player-team edge weights use past minutes plus frozen
+starter and bench contributions. The last ten same-season historical matches
+produce fixed 8- or 16-dimensional side representations and derived
+comparison fields.
+
+Graph-only and LR52-plus-graph use separate median-imputed, standardized,
+L2 `lbfgs` Logistic Regression pipelines with `C=1`, `max_iter=2000`, and
+seed 42. SVD and classifier preprocessing are rebuilt per fold. Complete
+dates update history as batches, and only development evidence selects the
+representation. No graph field can enter stable `fit_lr52`; the experiment is
+not part of inference or the default model path. See
+[Graph model](GRAPH_MODEL.md).

@@ -213,3 +213,29 @@ required:
 The source row-count split could divide dates; the public complete-date
 adaptation is recorded with its numerical effect. See
 [Deep capacity](DEEP_CAPACITY.md).
+
+## Temporal graph-model protocol
+
+The graph audit uses the same four outer folds and evaluates the source's two
+fixed internal representations, `svd8_recent10` and `svd16_recent10`.
+`TruncatedSVD` is fitted independently on each outer training graph. Target
+features aggregate only the last ten same-season matches from earlier dates;
+a complete target date is transformed before its graph relations enter
+history.
+
+Graph-only Logistic Regression is diagnostic. Configuration selection uses
+only the development weighted Log Loss of the exact 52 stable features plus
+graph features. The selected graph method is evaluated once on 2025 in both
+internal contexts. Candidate and LR52 metrics use identical keys.
+
+```text
+candidate_improvement_log_loss =
+    lr52_log_loss - lr52_graph_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+Market and availability contexts present in the private authority are
+excluded from the public Phase 5C2 port. See [Graph model](GRAPH_MODEL.md).

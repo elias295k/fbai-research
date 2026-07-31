@@ -123,6 +123,12 @@ exact stable 52-feature input
     -> fixed shallow/deep CPU MLP capacity audit
     -> development-only architecture selection
     -> identical-row LR52 comparison and predefined gate
+
+historical player-team relations
+    -> fold-local temporal bipartite SVD representation
+    -> graph-only diagnostic and LR52 + graph candidate
+    -> complete-date history updates
+    -> identical-row LR52 comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -142,6 +148,7 @@ See:
 - [Pseudo-xG research experiment](docs/PSEUDO_XG.md)
 - [Understat xG research experiment](docs/UNDERSTAT_XG.md)
 - [Deep-capacity research experiment](docs/DEEP_CAPACITY.md)
+- [Temporal graph-model research experiment](docs/GRAPH_MODEL.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 

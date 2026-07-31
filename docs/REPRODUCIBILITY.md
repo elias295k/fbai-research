@@ -217,3 +217,21 @@ Only the 52 internal fields enter either model. The public inner split keeps
 dates whole, unlike the source row-count split; selection and numerical
 differences are recorded explicitly. No learned state, tensors, predictions,
 or generated dataset is retained.
+
+## Phase 5C2 synthetic and historical graph-model paths
+
+Synthetic tests build invented fixture, appearance, and lineup relations.
+They prove exact graph semantics and configurations, duplicate-key failure,
+deterministic node IDs under shuffled input, target/future/same-date
+isolation, fold-local SVD and classifier fitting, deterministic CPU output,
+explicit H/D/A probabilities, identical LR52 keys, weighted aggregation,
+the frozen gate, stable feature fingerprint, and preservation of earlier
+research records.
+
+The L3 reproduction reads the authorized local matched-feature and
+Transfermarkt-derived artifacts in place. No downloader or provider request
+runs. The public complete-date batching adaptation reproduces all internal
+candidate metrics within `1e-8` and leaves selection and disposition
+unchanged. `research/graph_model/result.json` retains graph sizes and
+aggregate/fold metrics only; it excludes node labels, edge lists, embeddings,
+learned parameters, predictions, paths, and generated data.

@@ -13,6 +13,12 @@ from fbai.research.deep_capacity import (
     DeepCapacityConfig,
     evaluate_deep_capacity,
 )
+from fbai.research.graph_model import (
+    AUTHORITATIVE_GRAPH_CONFIGS,
+    GraphComparisonReport,
+    GraphEmbeddingConfig,
+    evaluate_graph_model,
+)
 from fbai.research.pseudo_xg import (
     PSEUDO_XG_FEATURE_COLUMNS,
     PseudoXGComparisonReport,
@@ -32,8 +38,11 @@ __all__ = [
     "CandidateComparisonReport",
     "CandidateFoldEvaluation",
     "AUTHORITATIVE_CONFIGS",
+    "AUTHORITATIVE_GRAPH_CONFIGS",
     "DeepCapacityComparisonReport",
     "DeepCapacityConfig",
+    "GraphComparisonReport",
+    "GraphEmbeddingConfig",
     "PSEUDO_XG_FEATURE_COLUMNS",
     "PseudoXGComparisonReport",
     "PseudoXGConfig",
@@ -44,6 +53,7 @@ __all__ = [
     "UnderstatXGConfig",
     "align_understat_xg",
     "evaluate_deep_capacity",
+    "evaluate_graph_model",
     "evaluate_understat_xg_candidate",
     "evaluate_pseudo_xg_candidate",
 ]

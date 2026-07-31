@@ -201,3 +201,16 @@ only the selected architecture. The evaluator emits aggregate records and
 never writes learned state. Importing or fitting stable LR52 does not import
 Torch, and the capacity branch does not alter `FEATURE_COLUMNS`,
 `LR52Config`, or any prior evaluator.
+
+`research.graph_model` is a fifth isolated branch. It consumes a separate
+local fixture/appearance/lineup contract and constructs a fold-local temporal
+team-player bipartite graph. Two fixed seeded `TruncatedSVD` representations
+emit 40 or 72 strict-prior fields. No graph dependency, message-passing
+network, pretrained representation, or CUDA path is introduced.
+
+Natural-key and game-ID uniqueness are mandatory. Node IDs are deterministic,
+and all fixtures on a date are transformed before that date updates team
+history. Each outer fold creates a fresh SVD basis and separate graph-only and
+LR52-plus-graph Logistic Regression pipelines. Stable LR52 never accepts
+graph fields, and graph records contain counts rather than node labels, edge
+lists, embeddings, or learned parameters.

@@ -68,3 +68,17 @@ That adaptation changes the selected network but not the conclusion:
 development improvement is far below `0.005`, the final fold is not
 confirmatory, and `DATA_CEILING_UPHELD` remains. Torch stays optional, LR52
 stays default, and no prior research record changes.
+
+## Phase 5C2: temporal graph representation
+
+Phase 5C2 ports the source's fixed team-player bipartite SVD experiment rather
+than introducing a GNN search. Two dimensions, one ten-match same-season
+window, frozen edge weights, and regularized Logistic Regression are
+evaluated on the matched 12,452-row scope.
+
+The public version strengthens same-date behavior by applying all graph
+history updates after the complete date batch. It reproduces the internal
+authority within `1e-8`: SVD8 plus LR52 improves development Log Loss by only
+`0.001456` and reverses on final. The gate fails and
+`DATA_CEILING_UPHELD` remains. Market and availability branches are excluded,
+LR52 remains default, and no graph artifact or prior result is changed.

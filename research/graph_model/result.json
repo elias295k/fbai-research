@@ -1,0 +1,392 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "temporal_graph_embedding_internal_historical_reproduction",
+  "status": "reproduced",
+  "class_order": [
+    "H",
+    "D",
+    "A"
+  ],
+  "stable_feature_count": 52,
+  "source_authority": {
+    "executable_representation": "graph_embeddings.py",
+    "executable_audit": "run_temporal_graph_embedding_audit.py",
+    "tests": "test_graph_embeddings.py",
+    "structured_result": "temporal_graph_embedding_eval.json",
+    "report": "TEMPORAL_GRAPH_EMBEDDING_RESULTS.md",
+    "preregistered_plan": "TEMPORAL_GRAPH_EMBEDDING_PLAN.md"
+  },
+  "scope": {
+    "matched_graph_rows": 12452,
+    "development_test_years": [
+      2022,
+      2023,
+      2024
+    ],
+    "historical_final_test_year": 2025,
+    "fold_test_rows": {
+      "2022": 1825,
+      "2023": 1751,
+      "2024": 1752,
+      "2025": 1751
+    },
+    "selection_context": "lr52_graph",
+    "excluded_source_contexts": [
+      "market_graph",
+      "lr52_availability_graph"
+    ],
+    "exclusion_reason": "Phase 5C2 prohibits market-odds and player-availability inputs"
+  },
+  "graph_definition": {
+    "type": "temporal team-player bipartite graph",
+    "team_nodes": "canonical division-team pairs",
+    "player_nodes": "source player identifiers",
+    "edge_semantics": "one contribution per past team-match-player relation",
+    "edge_weight": "minutes_played + 30*starter_flag + 5*bench_flag",
+    "matrix_value": "log1p(total team-player edge weight)",
+    "embedding": "TruncatedSVD right singular vectors scaled by square root singular value",
+    "history": "last 10 same-season team matches strictly before target date",
+    "date_policy": "all matches on one calendar date are computed before the date batch updates history",
+    "fit_policy": "fresh SVD basis from each outer-fold training window",
+    "unseen_player_policy": "zero embedding with known-weight coverage diagnostics",
+    "dependencies": [
+      "numpy",
+      "pandas",
+      "scikit-learn"
+    ]
+  },
+  "configurations": [
+    {
+      "name": "svd8_recent10",
+      "embedding_dimension": 8,
+      "history_window_matches": 10,
+      "starter_weight": 30.0,
+      "bench_weight": 5.0,
+      "seed": 42,
+      "graph_feature_count": 40,
+      "graph_only_classifier_feature_count": 40,
+      "graph_only_classifier_parameter_count": 123,
+      "lr52_graph_classifier_feature_count": 92,
+      "lr52_graph_classifier_parameter_count": 279
+    },
+    {
+      "name": "svd16_recent10",
+      "embedding_dimension": 16,
+      "history_window_matches": 10,
+      "starter_weight": 30.0,
+      "bench_weight": 5.0,
+      "seed": 42,
+      "graph_feature_count": 72,
+      "graph_only_classifier_feature_count": 72,
+      "graph_only_classifier_parameter_count": 219,
+      "lr52_graph_classifier_feature_count": 124,
+      "lr52_graph_classifier_parameter_count": 375
+    }
+  ],
+  "classifier": {
+    "type": "multinomial logistic regression",
+    "preprocessing": "median imputation then standard scaling fitted on outer-train rows only",
+    "solver": "lbfgs",
+    "penalty": "l2",
+    "regularization_c": 1.0,
+    "maximum_iterations": 2000,
+    "fit_intercept": true,
+    "class_weight": null,
+    "seed": 42,
+    "tolerance": 0.0001,
+    "device": "cpu"
+  },
+  "graph_sizes_by_fold": {
+    "2022": {
+      "training_fixtures": 5373,
+      "team_nodes": 120,
+      "player_nodes": 5293,
+      "nonzero_team_player_edges": 6449
+    },
+    "2023": {
+      "training_fixtures": 7198,
+      "team_nodes": 127,
+      "player_nodes": 6205,
+      "nonzero_team_player_edges": 8085
+    },
+    "2024": {
+      "training_fixtures": 8949,
+      "team_nodes": 133,
+      "player_nodes": 7109,
+      "nonzero_team_player_edges": 9690
+    },
+    "2025": {
+      "training_fixtures": 10701,
+      "team_nodes": 137,
+      "player_nodes": 7989,
+      "nonzero_team_player_edges": 11289
+    }
+  },
+  "baseline_lr52": {
+    "development_folds": {
+      "2022": {
+        "n_samples": 1825,
+        "log_loss": 1.0068670242203284,
+        "brier_score": 0.6014733877781652,
+        "ece": 0.03614771884206457
+      },
+      "2023": {
+        "n_samples": 1751,
+        "log_loss": 0.9835453295245216,
+        "brier_score": 0.5855173393061387,
+        "ece": 0.012963520167526468
+      },
+      "2024": {
+        "n_samples": 1752,
+        "log_loss": 0.9954045528537319,
+        "brier_score": 0.5940750286211178,
+        "ece": 0.0333794807722116
+      }
+    },
+    "development": {
+      "n_samples": 5328,
+      "log_loss": 0.9954333648271911,
+      "brier_score": 0.5937967800233481,
+      "ece": 0.027618160850792307
+    },
+    "historical_final": {
+      "n_samples": 1751,
+      "log_loss": 0.9998174146293667,
+      "brier_score": 0.5961998339861067,
+      "ece": 0.009221055415098336
+    },
+    "all_historical_diagnostic": {
+      "n_samples": 7079,
+      "log_loss": 0.9965177653362475,
+      "brier_score": 0.5943911785950093,
+      "ece": 0.02306761252222893
+    }
+  },
+  "development_candidates": [
+    {
+      "configuration": "svd8_recent10",
+      "context": "graph_only",
+      "classifier_parameter_count": 123,
+      "folds": {
+        "2022": {
+          "n_samples": 1825,
+          "log_loss": 1.0418225588629602,
+          "brier_score": 0.6262713222791586,
+          "ece": 0.033894955814340794
+        },
+        "2023": {
+          "n_samples": 1751,
+          "log_loss": 1.0366451409854336,
+          "brier_score": 0.6230977822413415,
+          "ece": 0.015552163719514732
+        },
+        "2024": {
+          "n_samples": 1752,
+          "log_loss": 1.0273324528461167,
+          "brier_score": 0.6164447764832667,
+          "ece": 0.018531957791761693
+        }
+      },
+      "development": {
+        "n_samples": 5328,
+        "log_loss": 1.0353562817524011,
+        "brier_score": 0.6219971149141773,
+        "ece": 0.022814963041518158,
+        "candidate_improvement_log_loss": -0.039922916925209995,
+        "improving_fold_count": 0
+      }
+    },
+    {
+      "configuration": "svd8_recent10",
+      "context": "lr52_graph",
+      "classifier_parameter_count": 279,
+      "folds": {
+        "2022": {
+          "n_samples": 1825,
+          "log_loss": 1.0069674903283228,
+          "brier_score": 0.601095238611939,
+          "ece": 0.023738111722652784,
+          "candidate_improvement_log_loss": -0.00010046610799441247
+        },
+        "2023": {
+          "n_samples": 1751,
+          "log_loss": 0.9828525638720977,
+          "brier_score": 0.5854293374587674,
+          "ece": 0.020503049727910762,
+          "candidate_improvement_log_loss": 0.0006927656524238213
+        },
+        "2024": {
+          "n_samples": 1752,
+          "log_loss": 0.9915637059237105,
+          "brier_score": 0.5913510757634318,
+          "ece": 0.020371910043603964,
+          "candidate_improvement_log_loss": 0.003840846930021402
+        }
+      },
+      "development": {
+        "n_samples": 5328,
+        "log_loss": 0.9939771249939139,
+        "brier_score": 0.5927426173225644,
+        "ece": 0.02156803310131517,
+        "candidate_improvement_log_loss": 0.0014562398332772508,
+        "improving_fold_count": 2
+      }
+    },
+    {
+      "configuration": "svd16_recent10",
+      "context": "graph_only",
+      "classifier_parameter_count": 219,
+      "folds": {
+        "2022": {
+          "n_samples": 1825,
+          "log_loss": 1.0386481230541174,
+          "brier_score": 0.6237666779733261,
+          "ece": 0.021907861262000575
+        },
+        "2023": {
+          "n_samples": 1751,
+          "log_loss": 1.037294125631459,
+          "brier_score": 0.6236339153085336,
+          "ece": 0.016998912453351334
+        },
+        "2024": {
+          "n_samples": 1752,
+          "log_loss": 1.0289085228969157,
+          "brier_score": 0.6171833412374244,
+          "ece": 0.027270581249868652
+        }
+      },
+      "development": {
+        "n_samples": 5328,
+        "log_loss": 1.035000482483079,
+        "brier_score": 0.6215582557910153,
+        "ece": 0.022057995656670257,
+        "candidate_improvement_log_loss": -0.03956711765588783,
+        "improving_fold_count": 0
+      }
+    },
+    {
+      "configuration": "svd16_recent10",
+      "context": "lr52_graph",
+      "classifier_parameter_count": 375,
+      "folds": {
+        "2022": {
+          "n_samples": 1825,
+          "log_loss": 1.008309016014596,
+          "brier_score": 0.6016293924355262,
+          "ece": 0.034521889650046225,
+          "candidate_improvement_log_loss": -0.0014419917942676275
+        },
+        "2023": {
+          "n_samples": 1751,
+          "log_loss": 0.9858513358993176,
+          "brier_score": 0.5875023778954876,
+          "ece": 0.016897334932844357,
+          "candidate_improvement_log_loss": -0.0023060063747960546
+        },
+        "2024": {
+          "n_samples": 1752,
+          "log_loss": 0.9956016518974393,
+          "brier_score": 0.5935734291395542,
+          "ece": 0.01364255421550004,
+          "candidate_improvement_log_loss": -0.00019709904370746045
+        }
+      },
+      "development": {
+        "n_samples": 5328,
+        "log_loss": 0.9967499507339822,
+        "brier_score": 0.594337641280468,
+        "ece": 0.021864008458014433,
+        "candidate_improvement_log_loss": -0.001316585906791068,
+        "improving_fold_count": 0
+      }
+    }
+  ],
+  "selection": {
+    "metric": "minimum development sample-count-weighted log loss among LR52+graph candidates",
+    "development_only": true,
+    "selected_configuration": "svd8_recent10",
+    "selected_context": "lr52_graph",
+    "source_selected_configuration": "svd8_recent10",
+    "selection_matches_source": true
+  },
+  "historical_final_contexts": {
+    "graph_only": {
+      "configuration": "svd8_recent10",
+      "classifier_parameter_count": 123,
+      "n_samples": 1751,
+      "log_loss": 1.0369952442146693,
+      "brier_score": 0.6224579225184953,
+      "ece": 0.01551626264674645
+    },
+    "lr52_graph": {
+      "configuration": "svd8_recent10",
+      "classifier_parameter_count": 279,
+      "n_samples": 1751,
+      "log_loss": 1.0005311955055134,
+      "brier_score": 0.5965105479395031,
+      "ece": 0.017044832969817122,
+      "candidate_improvement_log_loss": -0.0007137808761467079
+    }
+  },
+  "all_historical_diagnostic": {
+    "configuration": "svd8_recent10",
+    "context": "lr52_graph",
+    "fold_count": 4,
+    "lr52": {
+      "n_samples": 7079,
+      "log_loss": 0.9965177653362475,
+      "brier_score": 0.5943911785950093,
+      "ece": 0.02306761252222893
+    },
+    "candidate": {
+      "n_samples": 7079,
+      "log_loss": 0.9955982829916269,
+      "brier_score": 0.593674619937377,
+      "ece": 0.0204492135745101
+    },
+    "candidate_improvement_log_loss": 0.0009194823446205813
+  },
+  "success_gate": {
+    "definition": {
+      "primary_metric": "development_sample_count_weighted_log_loss",
+      "improvement_sign_convention": "lr52_log_loss_minus_graph_candidate_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "development_fold_count": 3
+    },
+    "observed": {
+      "candidate_improvement_log_loss": 0.0014562398332772508,
+      "improving_fold_count": 2,
+      "historical_final_improvement_log_loss": -0.0007137808761467079
+    },
+    "passed": false,
+    "final_confirmed": false,
+    "disposition": "DATA_CEILING_UPHELD"
+  },
+  "reference_comparison": {
+    "authoritative_reference": "temporal_graph_embedding_eval.json internal graph family",
+    "safety_adaptation": "complete target-date batches and deterministic natural-key ordering",
+    "numerical_effect": "no material metric or selection change",
+    "maximum_absolute_differences": {
+      "log_loss": 7.63395e-11,
+      "brier_score": 3.89954e-11,
+      "ece": 5.45771e-11
+    },
+    "comparison_tolerances": {
+      "log_loss": 1e-8,
+      "brier_score": 1e-8,
+      "ece": 1e-8
+    },
+    "reproduction_passed": true,
+    "verdict": "pass_with_complete_date_protocol_adaptation"
+  },
+  "verdict": "failed_gate",
+  "disposition": "DATA_CEILING_UPHELD",
+  "limitations": [
+    "The source matched-fixture row scope is retained for comparability, but no market or availability field enters either internal classifier.",
+    "The graph basis is an SVD representation, not a message-passing GNN.",
+    "The historical-final fold has previously been examined and is not newly unseen.",
+    "No node labels, edge list, embedding, learned state, or match-level prediction is retained."
+  ]
+}
