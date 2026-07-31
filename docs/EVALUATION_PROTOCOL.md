@@ -239,3 +239,29 @@ required:
 
 Market and availability contexts present in the private authority are
 excluded from the public Phase 5C2 port. See [Graph model](GRAPH_MODEL.md).
+
+## Player-availability protocol
+
+The availability audit exact-key aligns the canonical feature table with a
+separate local fixture/player-relation source. Its 21 source-defined
+strictly-prior semantics are emitted for home, away, and their difference,
+creating a separate 63-feature contract. Division/team histories reset by
+season, and all matches on a date are transformed before that date enters
+history. Valuation timestamps must be strictly earlier than the target date.
+
+Actual target starters and bench membership are excluded because the source
+artifact lacks publication timestamps. Target minutes, substitutions, and
+participation are post-match and forbidden. Candidate preprocessing is fitted
+on each outer training fold, LR52 is independently fitted on the exact same
+covered keys, and 2025 is evaluated once after the three development folds.
+
+```text
+candidate_improvement_log_loss =
+    lr52_aligned_log_loss - availability_candidate_log_loss
+
+required:
+    candidate_improvement_log_loss >= 0.005
+    and at least 2 of 3 development folds improve
+```
+
+See [Player availability](PLAYER_AVAILABILITY.md).

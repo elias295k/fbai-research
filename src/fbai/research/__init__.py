@@ -19,6 +19,11 @@ from fbai.research.graph_model import (
     GraphEmbeddingConfig,
     evaluate_graph_model,
 )
+from fbai.research.player_availability import (
+    PRIOR_AVAILABILITY_FEATURES,
+    AvailabilityComparisonReport,
+    evaluate_player_availability,
+)
 from fbai.research.pseudo_xg import (
     PSEUDO_XG_FEATURE_COLUMNS,
     PseudoXGComparisonReport,
@@ -43,6 +48,8 @@ __all__ = [
     "DeepCapacityConfig",
     "GraphComparisonReport",
     "GraphEmbeddingConfig",
+    "PRIOR_AVAILABILITY_FEATURES",
+    "AvailabilityComparisonReport",
     "PSEUDO_XG_FEATURE_COLUMNS",
     "PseudoXGComparisonReport",
     "PseudoXGConfig",
@@ -54,6 +61,7 @@ __all__ = [
     "align_understat_xg",
     "evaluate_deep_capacity",
     "evaluate_graph_model",
+    "evaluate_player_availability",
     "evaluate_understat_xg_candidate",
     "evaluate_pseudo_xg_candidate",
 ]

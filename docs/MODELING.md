@@ -187,3 +187,16 @@ dates update history as batches, and only development evidence selects the
 representation. No graph field can enter stable `fit_lr52`; the experiment is
 not part of inference or the default model path. See
 [Graph model](GRAPH_MODEL.md).
+
+## Phase 5C3 player-availability boundary
+
+The availability candidate joins the unchanged 52 stable features with 63
+source-defined fields derived only from completed prior matches and strictly
+earlier valuations. It uses a separate median-imputed, standardized L2
+`lbfgs` Logistic Regression pipeline with `C=1`, `max_iter=2000`, and seed 42.
+
+No target official lineup, bench, participation, minutes, substitutions, or
+unverified injury label may enter the candidate. Histories reset by season and
+update only after a complete date batch. Coverage filtering is applied before
+both candidate and LR52 fitting, so their test keys are identical. The failed
+candidate remains research-only. See [Player availability](PLAYER_AVAILABILITY.md).

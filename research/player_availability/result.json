@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "status": "reproduced",
+  "experiment_id": "prior_player_availability_lr115_historical_reproduction",
+  "source_authority": {
+    "executable": [
+      "src/fbai_new/availability.py",
+      "scripts/run_availability_eval.py"
+    ],
+    "tests": [
+      "tests/test_availability.py"
+    ],
+    "structured_result": "results/availability_eval.json",
+    "reports": [
+      "reports/PLAYER_AVAILABILITY_RESULTS.md",
+      "reports/PLAYER_AVAILABILITY_FEATURES.md",
+      "reports/PLAYER_AVAILABILITY_SIGNAL_CONTRACT.md"
+    ]
+  },
+  "scope": {
+    "base_big5_matches": 12458,
+    "supplied_matches": 12452,
+    "covered_matches": 12452,
+    "covered_share": 0.9995183817627228,
+    "unmatched_base_matches": 6,
+    "coverage_filter_changes_lr52_population": true,
+    "exact_key_only": true,
+    "appearance_rows": 374319,
+    "lineup_rows": 513250,
+    "valuation_rows": 656301,
+    "appearance_games": 12452,
+    "lineup_games": 12334,
+    "duplicate_match_keys": 0,
+    "duplicate_game_ids": 0,
+    "duplicate_player_relations": 0,
+    "invalid_minutes_rows": 0,
+    "invalid_role_rows": 0,
+    "invalid_valuation_rows": 0,
+    "unmatched_relation_games": 0,
+    "coverage_by_division": {
+      "D1": {"base": 2142, "covered": 2142, "share": 1.0},
+      "E0": {"base": 2660, "covered": 2660, "share": 1.0},
+      "F1": {"base": 2336, "covered": 2332, "share": 0.9982876712328768},
+      "I1": {"base": 2660, "covered": 2660, "share": 1.0},
+      "SP1": {"base": 2660, "covered": 2658, "share": 0.9992481203007518}
+    },
+    "coverage_by_season": {
+      "2019": {"base": 1725, "covered": 1721, "share": 0.9976811594202899},
+      "2020": {"base": 1826, "covered": 1826, "share": 1.0},
+      "2021": {"base": 1826, "covered": 1826, "share": 1.0},
+      "2022": {"base": 1826, "covered": 1825, "share": 0.9994523548740416},
+      "2023": {"base": 1752, "covered": 1751, "share": 0.9994292237442922},
+      "2024": {"base": 1752, "covered": 1752, "share": 1.0},
+      "2025": {"base": 1751, "covered": 1751, "share": 1.0}
+    },
+    "coverage_by_fold": {
+      "2022": {"base": 1826, "covered": 1825, "share": 0.9994523548740416},
+      "2023": {"base": 1752, "covered": 1751, "share": 0.9994292237442922},
+      "2024": {"base": 1752, "covered": 1752, "share": 1.0},
+      "2025": {"base": 1751, "covered": 1751, "share": 1.0}
+    },
+    "availability_cell_coverage_by_fold": {
+      "2022": 0.967723418134377,
+      "2023": 0.9673293265526275,
+      "2024": 0.9673842139595564,
+      "2025": 0.9652262199378133
+    }
+  },
+  "timing_audit": {
+    "fixture_identity": "known_before_kickoff_join_and_chronology_only",
+    "historical_appearances_and_minutes": "derived_only_from_completed_prior_matches",
+    "historical_starter_roles": "derived_only_from_completed_prior_matches",
+    "strictly_earlier_valuations": "known_before_kickoff",
+    "target_official_lineup_and_bench": "timing_unknown_forbidden",
+    "target_participation_minutes_and_substitutions": "known_only_after_target_match_forbidden",
+    "injury_suspension_absence_labels": "timing_unknown_not_available",
+    "same_date_rows": "forbidden_until_entire_date_batch_is_transformed"
+  },
+  "feature_contract": {
+    "stable_feature_count": 52,
+    "stable_feature_fingerprint": "09b9204c283e8adf7e91e98cb1a547183b3f832cc95f815b9845208be822de78",
+    "availability_feature_count": 63,
+    "base_semantic_count": 21,
+    "candidate_input_count": 115,
+    "season_reset": true,
+    "division_isolation": true,
+    "same_date_batches": true,
+    "features": [
+      "avail_H_matches_30d_pre", "avail_H_minutes_7d_pre", "avail_H_minutes_14d_pre", "avail_H_minutes_21d_pre", "avail_H_minutes_30d_pre", "avail_H_days_since_prev_match_pre", "avail_H_unique_players_5_pre", "avail_H_unique_players_10_pre", "avail_H_unique_starters_5_pre", "avail_H_top5_minutes_share_5_pre", "avail_H_top11_minutes_share_5_pre", "avail_H_top11_minutes_share_10_pre", "avail_H_avg_player_minutes_5_pre", "avail_H_starter_overlap_last_pre", "avail_H_starter_jaccard_last_pre", "avail_H_rotation_index_last_pre", "avail_H_avg_starter_changes_5_pre", "avail_H_recent_players_value_sum_5_pre", "avail_H_recent_top11_value_sum_5_pre", "avail_H_last_starters_value_sum_pre", "avail_H_recent_value_coverage_5_pre",
+      "avail_A_matches_30d_pre", "avail_A_minutes_7d_pre", "avail_A_minutes_14d_pre", "avail_A_minutes_21d_pre", "avail_A_minutes_30d_pre", "avail_A_days_since_prev_match_pre", "avail_A_unique_players_5_pre", "avail_A_unique_players_10_pre", "avail_A_unique_starters_5_pre", "avail_A_top5_minutes_share_5_pre", "avail_A_top11_minutes_share_5_pre", "avail_A_top11_minutes_share_10_pre", "avail_A_avg_player_minutes_5_pre", "avail_A_starter_overlap_last_pre", "avail_A_starter_jaccard_last_pre", "avail_A_rotation_index_last_pre", "avail_A_avg_starter_changes_5_pre", "avail_A_recent_players_value_sum_5_pre", "avail_A_recent_top11_value_sum_5_pre", "avail_A_last_starters_value_sum_pre", "avail_A_recent_value_coverage_5_pre",
+      "avail_diff_matches_30d_pre", "avail_diff_minutes_7d_pre", "avail_diff_minutes_14d_pre", "avail_diff_minutes_21d_pre", "avail_diff_minutes_30d_pre", "avail_diff_days_since_prev_match_pre", "avail_diff_unique_players_5_pre", "avail_diff_unique_players_10_pre", "avail_diff_unique_starters_5_pre", "avail_diff_top5_minutes_share_5_pre", "avail_diff_top11_minutes_share_5_pre", "avail_diff_top11_minutes_share_10_pre", "avail_diff_avg_player_minutes_5_pre", "avail_diff_starter_overlap_last_pre", "avail_diff_starter_jaccard_last_pre", "avail_diff_rotation_index_last_pre", "avail_diff_avg_starter_changes_5_pre", "avail_diff_recent_players_value_sum_5_pre", "avail_diff_recent_top11_value_sum_5_pre", "avail_diff_last_starters_value_sum_pre", "avail_diff_recent_value_coverage_5_pre"
+    ]
+  },
+  "candidate_configuration": {
+    "identifier": "lr115_median_standardized_lbfgs_l2_c1_iter2000_seed42",
+    "imputation": "training_fold_median",
+    "scaling": "training_fold_standard",
+    "solver": "lbfgs",
+    "penalty": "l2",
+    "C": 1.0,
+    "max_iter": 2000,
+    "tolerance": 0.0001,
+    "random_seed": 42,
+    "class_weight": null,
+    "class_order": ["H", "D", "A"],
+    "parameter_count": 348,
+    "device": "cpu"
+  },
+  "folds": {
+    "2022": {
+      "role": "development", "train_rows": 5373, "test_rows": 1825,
+      "lr52": {"log_loss": 1.0068670343569126, "brier_score": 0.6014733958867042, "ece": 0.036147724430123096},
+      "candidate": {"log_loss": 1.0178026751808475, "brier_score": 0.6046232082773614, "ece": 0.03434623587025855},
+      "candidate_improvement_log_loss": -0.010935640823934945
+    },
+    "2023": {
+      "role": "development", "train_rows": 7198, "test_rows": 1751,
+      "lr52": {"log_loss": 0.983545313922706, "brier_score": 0.5855173272305944, "ece": 0.012963519167500728},
+      "candidate": {"log_loss": 0.9804064972454359, "brier_score": 0.5832044810824681, "ece": 0.024054137026744377},
+      "candidate_improvement_log_loss": 0.0031388166772701176
+    },
+    "2024": {
+      "role": "development", "train_rows": 8949, "test_rows": 1752,
+      "lr52": {"log_loss": 0.9953943056477067, "brier_score": 0.5940682866913352, "ece": 0.0340678078078326},
+      "candidate": {"log_loss": 0.9989808649436898, "brier_score": 0.5962355817148507, "ece": 0.022828147767547814},
+      "candidate_improvement_log_loss": -0.0035865592959830606
+    },
+    "2025": {
+      "role": "historical_final", "train_rows": 10701, "test_rows": 1751,
+      "lr52": {"log_loss": 0.9998174146257498, "brier_score": 0.5961998339824319, "ece": 0.009221055436632493},
+      "candidate": {"log_loss": 1.0007915425845215, "brier_score": 0.5959808504662752, "ece": 0.019317027575941118},
+      "candidate_improvement_log_loss": -0.00097412795877172
+    }
+  },
+  "development": {
+    "n_samples": 5328,
+    "lr52": {"log_loss": 0.9954299935951213, "brier_score": 0.593794561891371, "ece": 0.027844504209195035},
+    "candidate": {"log_loss": 0.9993235987731137, "brier_score": 0.5948260399110369, "ece": 0.02717634934042699},
+    "candidate_improvement_log_loss": -0.003893605177992421,
+    "improving_fold_count": 1
+  },
+  "historical_final": {
+    "n_samples": 1751,
+    "lr52": {"log_loss": 0.9998174146257498, "brier_score": 0.5961998339824319, "ece": 0.009221055436632493},
+    "candidate": {"log_loss": 1.0007915425845215, "brier_score": 0.5959808504662752, "ece": 0.019317027575941118},
+    "candidate_improvement_log_loss": -0.00097412795877172
+  },
+  "all_historical_diagnostic": {
+    "n_samples": 7079,
+    "lr52": {"log_loss": 0.9965152279819881, "brier_score": 0.5943895091199976, "ece": 0.02323796955730112},
+    "candidate": {"log_loss": 0.9996866966137373, "brier_score": 0.5951116838271581, "ece": 0.025232335721326167},
+    "candidate_improvement_log_loss": -0.003171468631749219
+  },
+  "success_gate": {
+    "definition": {
+      "primary_metric": "development_sample_count_weighted_log_loss",
+      "minimum_improvement_log_loss": 0.005,
+      "minimum_improving_folds": 2,
+      "development_fold_count": 3
+    },
+    "observed": {
+      "candidate_improvement_log_loss": -0.003893605177992421,
+      "improving_fold_count": 1,
+      "historical_final_improvement_log_loss": -0.00097412795877172
+    },
+    "passed": false
+  },
+  "reference_comparison": {
+    "safe_feature_cells_changed_vs_source_cache": 0,
+    "safe_feature_rows_changed_vs_source_cache": 0,
+    "source_candidate_development_log_loss": 0.9993163412937749,
+    "public_candidate_development_log_loss": 0.9993235987731137,
+    "development_log_loss_difference": 0.000007257479338829,
+    "source_candidate_final_log_loss": 1.0010733169623836,
+    "public_candidate_final_log_loss": 1.0007915425845215,
+    "final_log_loss_difference": -0.0002817743778621431,
+    "maximum_absolute_log_loss_difference": 0.0002817743778621431,
+    "maximum_absolute_brier_difference": 0.00008630614502425038,
+    "maximum_absolute_ece_difference": 0.001172572000828073,
+    "comparison_tolerances": {"log_loss": 0.0003, "brier_score": 0.0001, "ece": 0.00125},
+    "reproduction_passed": true,
+    "difference_explanation": "The 63 rebuilt features match the source cache exactly; residual metric drift is bounded numerical-library drift. Gate and disposition are unchanged."
+  },
+  "verdict": "failed",
+  "disposition": "PLAYER_AVAILABILITY_REJECTED_FOR_NOW",
+  "retention": {
+    "aggregate_and_fold_metadata_only": true,
+    "individual_player_rows_exported": false,
+    "predictions_exported": false,
+    "fitted_model_exported": false,
+    "generated_data_exported": false,
+    "provider_request_occurred": false
+  }
+}

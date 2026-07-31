@@ -235,3 +235,19 @@ candidate metrics within `1e-8` and leaves selection and disposition
 unchanged. `research/graph_model/result.json` retains graph sizes and
 aggregate/fold metrics only; it excludes node labels, edge lists, embeddings,
 learned parameters, predictions, paths, and generated data.
+
+## Phase 5C3 synthetic and historical player-availability paths
+
+Synthetic tests use invented teams, players, appearances, lineups, and
+valuations. They prove the exact 63-feature tuple, timing classifications,
+duplicate and quality failures, current/future/same-date exclusion, season and
+division isolation, shuffle invariance, fold-local preprocessing, explicit
+H/D/A order, identical LR52 keys, weighted aggregation, gate logic, the stable
+52-feature fingerprint, and preservation of earlier research records.
+
+The historical reproduction reads authorized local artifacts in place and
+makes no provider request. It rebuilds the safe features from raw local frames;
+all 63 columns match the source cache cell-for-cell. Only aggregate source
+quality, coverage, fold metrics, gate values, and bounded reference differences
+are retained. Player rows, lineups, raw data, predictions, learned state,
+machine paths, and generated datasets are excluded.

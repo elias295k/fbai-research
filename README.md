@@ -1,9 +1,9 @@
 # FBAI — Football Intelligence Research
 
 `football-outcome-lab` is a compact, leakage-aware foundation for football
-research. Phase 5B1 adds an isolated historical pseudo-xG experiment alongside
-the reproducible LR52 pipeline, Match2Vec candidate, and separate
-closing-market benchmark:
+research. It keeps the reproducible LR52 pipeline stable while isolating
+optional historical research candidates and a separate closing-market
+benchmark:
 
 - source-shaped CSV normalization into one canonical schema;
 - strict match and natural-key integrity validation;
@@ -24,6 +24,7 @@ closing-market benchmark:
 - an optional, fold-local Match2Vec sequence-representation experiment;
 - a fold-local Poisson pseudo-xG experiment using only canonical match stats;
 - 12 strictly-prior pseudo-xG features in a separate LR64 candidate contract;
+- a source-verified, strictly-prior 63-feature player-availability audit;
 - a predefined candidate gate with LR52 comparison on identical rows;
 - separated development, historical-final, and diagnostic reports;
 - deterministic, wholly synthetic raw, canonical, and separate market records;
@@ -129,6 +130,12 @@ historical player-team relations
     -> graph-only diagnostic and LR52 + graph candidate
     -> complete-date history updates
     -> identical-row LR52 comparison and predefined gate
+
+historical completed-match participation and lineups
+    -> 63 strictly-prior load, continuity, and valuation features
+    -> target lineup, target participation, and same-date rows excluded
+    -> LR52 + availability candidate on exact covered keys
+    -> identical-row LR52 comparison and predefined gate
 ```
 
 Closing prices are a strong late-information, near-kickoff benchmark. They are
@@ -149,6 +156,7 @@ See:
 - [Understat xG research experiment](docs/UNDERSTAT_XG.md)
 - [Deep-capacity research experiment](docs/DEEP_CAPACITY.md)
 - [Temporal graph-model research experiment](docs/GRAPH_MODEL.md)
+- [Player-availability research experiment](docs/PLAYER_AVAILABILITY.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
 - [Project evolution](docs/PROJECT_EVOLUTION.md)
 
